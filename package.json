@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "12.15.0"
+  },
   "scripts": {
     "client": "npm run start --prefix client",
     "server": "nodemon index.js",
@@ -14,7 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcryptjs": "^2.4.3",
     "concurrently": "^5.1.0",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
