@@ -35,7 +35,6 @@ class App extends React.Component {
       const response = await fetch(url, options);
       const jsonData = await response.json({});
       console.log(jsonData);
-      // localStorage.setItem("movies", JSON.stringify(jsonData));
       this.setState({ movies: jsonData, loaded: true });
 
     } catch (error) {
