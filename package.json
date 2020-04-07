@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": { 
+      "node": "12.15.0" 
+   },
   "scripts": {
     "client": "npm run start --prefix client",
     "server": "nodemon index.js",
