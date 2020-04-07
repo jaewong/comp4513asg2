@@ -83,16 +83,15 @@ class App extends React.Component {
         "mode": "cors"
       }
 
-      const response = await fetch(url, options);
-      const jsonData = await response.json({});
-      console.log(jsonData);
+      // const response = await fetch(url, options);
+      // const jsonData = await response.json({});
+     //console.log(jsonData);
       // localStorage.setItem("movies", JSON.stringify(jsonData));
       this.setState({ loggedin: true });
     }
   }
 
   render() {
-    this.checkLoggedIn();
     if (this.state.loaded && this.state.loggedin) {
       return (
         <main>
