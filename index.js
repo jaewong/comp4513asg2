@@ -33,6 +33,7 @@ app.use(cors());
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 
+
 // Express session
 app.use(cookieParser('oreos'));
 app.use(
@@ -67,6 +68,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.json({ error: err });
 });
+
 
 app.use(parser.json());
 

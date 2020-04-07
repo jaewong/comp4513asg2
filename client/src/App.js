@@ -27,12 +27,12 @@ class App extends React.Component {
 
       //      const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
 
-      const url = "https://comp4513asg2.netlify.com/?fbclid=IwAR3Cb9YgYtF27-9QyYecFFDFrCATeUCi0STiMZMBBrx-y5-DdrYL7AmNZNg/api/brief";
+      // const url = "https://comp4513asg2.netlify.com/?fbclid=IwAR3Cb9YgYtF27-9QyYecFFDFrCATeUCi0STiMZMBBrx-y5-DdrYL7AmNZNg/api/brief";
 
-      const response = await fetch(url);
-      const jsonData = await response.json();
+      // const response = await fetch(url);
+      // const jsonData = await response.json();
 
-      this.setState({ movies: jsonData, loaded: true });
+      // this.setState({ movies: jsonData, loaded: true });
 
 
     } catch (error) {

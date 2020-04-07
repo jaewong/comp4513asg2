@@ -11,11 +11,23 @@ class Profile extends React.Component {
 
     async componentDidMount() {
         try {
-            const url = `https://comp4513asg2.herokuapp.com/api/users/1`;
-            const response = await fetch(url);
-            const jsonData = await response.json();
-            console.log(jsonData);
-            this.setState({ userData: jsonData }, console.log(this.state.userData));
+
+            fetch("https://comp4513asg2.herokuapp.com/api/users/1", {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(async response => {
+                    if (response.ok) {
+                        this.apiError = false;
+                        this.result = await response.json();
+                    } else {
+                        this.apiError = true;
+                    }
+                })
+                .catch(() => (this.apiError = true))
+
+
         } catch (error) {
             console.error(error);
         }
