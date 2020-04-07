@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row, Col, Button, Divider } from 'antd';
 
 class CastItem extends React.Component {
     castView = () => {
@@ -8,11 +9,14 @@ class CastItem extends React.Component {
 
     render() {
         return (
-            <li key={this.key} className='tab-items'>
-                <div>{this.props.cast.character}</div>
-                <div>{this.props.cast.name}</div>
-                <button onClick={this.castView}>View</button>
-            </li>
+            <>
+                <Row align="middle" key={this.key} className='tab-items'>
+                    <Col span='6' offset='2'>{this.props.cast.character}</Col>
+                    <Col span='6' offset='2'>{this.props.cast.name}</Col>
+                    <Col span='6' offset='2'><Button onClick={this.castView}>View</Button></Col>
+                </Row>
+                <Divider orientation="left" className="divider"/>
+            </>
         );
     }
 }
