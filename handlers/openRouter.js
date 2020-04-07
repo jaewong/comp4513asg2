@@ -5,7 +5,12 @@ const helper = require('./helpers.js');
 
 // Welcome Page
 router.get('/', helper.ensureAuthenticated, (req, resp) => {
-   resp.render('home', { user: req.user });
+   resp.writeHead(301,
+      { Location: 'https://comp4513asg2.netlify.com' }
+   );
+   console.log(req);
+   resp.body(req.user)
+   resp.end();
 });
 
 router.get('/login', (req, resp) => {

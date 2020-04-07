@@ -18,27 +18,24 @@ class App extends React.Component {
     this.state = { movies: [] };
     this.state.favorites = [];
     this.state.loaded = false;
+    this.state.loggedin = false;
   }
 
   async componentDidMount() {
     try {
-       if (JSON.parse(localStorage.getItem("movies"))) {
+      const url = "https://comp4513asg2.herokuapp.com/api/movies";
 
-         this.setState({
-           movies: JSON.parse(localStorage.getItem("movies"))
-         });
-         this.setState({ loaded: true });
-       }
-       else {
-      const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
-           
       //const url = "/api/brief";
+      const options = {
+        "Content-Type": "application/json",
+        "mode": "cors"
+      }
 
-      const response = await fetch(url);
-      const jsonData = await response.json();
-      localStorage.setItem("movies", JSON.stringify(jsonData));
+      const response = await fetch(url, options);
+      const jsonData = await response.json({});
+      console.log(jsonData);
+      // localStorage.setItem("movies", JSON.stringify(jsonData));
       this.setState({ movies: jsonData, loaded: true });
-       }
 
     } catch (error) {
       console.error(error);
@@ -75,8 +72,28 @@ class App extends React.Component {
 
   }
 
+  checkLoggedIn = () => {
+    if (!this.state.loggedin) {
+      window.location.href = "https://comp4513asg2.herokuapp.com";
+      const url = "https://comp4513asg2.herokuapp.com/";
+
+      //const url = "/api/brief";
+      const options = {
+        "Content-Type": "application/json",
+        "mode": "cors"
+      }
+
+      const response = await fetch(url, options);
+      const jsonData = await response.json({});
+      console.log(jsonData);
+      // localStorage.setItem("movies", JSON.stringify(jsonData));
+      this.setState({ loggedin: true });
+    }
+  }
+
   render() {
-    if (this.state.loaded) {
+    this.checkLoggedIn();
+    if (this.state.loaded && this.state.loggedin) {
       return (
         <main>
           {/* Used this Tutorial https://www.youtube.com/watch?v=NUQkajBdnmQ , https://github.com/Ihatetomatoes/react-router-page-transition-css */}
