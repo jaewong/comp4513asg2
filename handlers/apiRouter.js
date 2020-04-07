@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 //    origin: 'https://comp4513asg2.netlify.com/'
 // }
 
-// const router = express.Router();
+const router = express.Router();
 
 // router.get('/users/:id', cors(corsOptions), (req, resp) => {
 //    UserModel.find({ id: req.params.id }, (err, data) => {
