@@ -36,7 +36,7 @@ class MovieDetailsView extends React.Component {
             const response = await fetch(url, options);
             const jsonData = await response.json({});
             console.log(jsonData);
-            this.setState({ movies: jsonData, loaded: true });
+            this.setState({ movies: jsonData[0], loaded: true });
 
         } catch (error) {
             console.error(error);

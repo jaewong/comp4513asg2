@@ -13,15 +13,15 @@ class DetailTabs extends React.Component {
 
     render() {
         const { TabPane } = Tabs;
-        
+
         return (
             <Tabs defaultActiveKey="1" id="tabs">
                 <TabPane tab="Cast" key="1" className="tab-list">
                     <Cast castData={this.props.movieData.production.cast} view={this.props.toggle} />
-                    </TabPane>
+                </TabPane>
                 <TabPane tab="Crew" key="2" className="tab-list">
                     <Crew crewData={this.props.movieData.production.crew} />
-                    </TabPane>
+                </TabPane>
             </Tabs>
         );
     }
