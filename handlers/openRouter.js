@@ -5,7 +5,7 @@ const helper = require('./helpers.js');
 
 // Welcome Page
 router.get('/', helper.ensureAuthenticated, (req, resp) => {
-   resp.render('https://comp4513asg2.netlify.com', { user: req.user });
+   resp.redirect('https://comp4513asg2.netlify.com', { user: req.user });
 });
 
 router.get('/login', (req, resp) => {
