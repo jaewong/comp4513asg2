@@ -18,11 +18,12 @@ class App extends React.Component {
     this.state = { movies: [] };
     this.state.favorites = [];
     this.state.loaded = false;
+    this.state.loggedin = false;
   }
 
   async componentDidMount() {
     try {
-      const url = "https://comp4513asg2.herokuapp.com/api/brief";
+      const url = "https://comp4513asg2.herokuapp.com/api/movies";
 
       //const url = "/api/brief";
       const options = {
@@ -71,8 +72,28 @@ class App extends React.Component {
 
   }
 
+  checkLoggedIn = () => {
+    if (!this.state.loggedin) {
+      window.location.href = "https://comp4513asg2.herokuapp.com";
+      const url = "https://comp4513asg2.herokuapp.com/";
+
+      //const url = "/api/brief";
+      const options = {
+        "Content-Type": "application/json",
+        "mode": "cors"
+      }
+
+      const response = await fetch(url, options);
+      const jsonData = await response.json({});
+      console.log(jsonData);
+      // localStorage.setItem("movies", JSON.stringify(jsonData));
+      this.setState({ loggedin: true });
+    }
+  }
+
   render() {
-    if (this.state.loaded) {
+    this.checkLoggedIn();
+    if (this.state.loaded && this.state.loggedin) {
       return (
         <main>
           {/* Used this Tutorial https://www.youtube.com/watch?v=NUQkajBdnmQ , https://github.com/Ihatetomatoes/react-router-page-transition-css */}
