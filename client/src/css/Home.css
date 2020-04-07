@@ -1,0 +1,36 @@
+#banner .home-browse{
+    background-color: white;
+    border-radius: 15px;
+    padding: 2rem 4em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#banner{
+    height: 100vh;
+    color: black;
+    text-align: center;
+    background-attachment: fixed;
+    justify-content: center;
+    align-content: center;
+}
+
+#imgURL{
+    position: fixed;
+    color: white;
+    bottom: 0;
+    font-size: 10px;
+}
+
+@media only screen and (max-width: 800px){
+    #banner .home-browse{
+        padding: 1em;
+    }
+
+    #homeBtn{
+        display: block !important;
+    }
+
+    #homeBtn button{
+        margin: 0.5em;
+    }
+}
