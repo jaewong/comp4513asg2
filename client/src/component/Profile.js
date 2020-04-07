@@ -11,6 +11,7 @@ class Profile extends React.Component {
 
     async componentDidMount() {
         try {
+<<<<<<< HEAD
 
             let url = "https://comp4513asg2.herokuapp.com/api/users/1";
             console.log("here");
@@ -23,6 +24,12 @@ class Profile extends React.Component {
             const data = await resp.json();
             console.log(data);
 
+=======
+            const url = `/api/users/1`;
+            const response = await fetch(url);
+            const jsonData = await response.json();
+            this.setState({ userData: jsonData }, console.log(this.state.userData));
+>>>>>>> d0d4609f591ccd32d8196376ab7490f5704d5b94
         } catch (error) {
             console.error(error);
         }
@@ -30,7 +37,11 @@ class Profile extends React.Component {
 
     render() {
         if (this.state.userData.length > 0) {
+<<<<<<< HEAD
             { console.log(this.state.userData[0]); }
+=======
+            { console.log(this.state.userData); }
+>>>>>>> d0d4609f591ccd32d8196376ab7490f5704d5b94
             { console.log(this.state.userData.email) }
             return (
                 <div>

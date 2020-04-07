@@ -5,9 +5,8 @@ import DetailTabs from './DetailTabs.js';
 import Favorites from './Favorites.js';
 import CastView from './CastView.js';
 import "../css/MovieDetails.css";
-import { Row, Col } from 'antd';
-
-import { Layout } from 'antd';
+import { Link } from 'react-router-dom';
+import { Row, Col, Layout, Button } from 'antd';
 
 class MovieDetailsView extends React.Component {
 
@@ -94,12 +93,14 @@ class MovieDetailsView extends React.Component {
                     <HeaderApp />
                     <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
                         <Favorites favs={this.state.favs} delete={this.deleteFav} />
+                        <div id="close" style={{ textAlign: 'right' }}>
+                            <Link to='./default'>
+                                <Button type="primary" danger>Close</Button>
+                            </Link>
+                        </div>
                         <Row id="movie-details">
                             <Col flex="3">{component}</Col>
-                            <Col flex="auto"><DetailTabs movieData={this.state.movieData} toggle={this.castViewOn} /></Col>
-                        </Row>
-                        <Row>
-
+                            <Col flex="2"><DetailTabs movieData={this.state.movieData} toggle={this.castViewOn} /></Col>
                         </Row>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
@@ -112,6 +113,11 @@ class MovieDetailsView extends React.Component {
                     <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
                         <HeaderApp />
                         <Favorites favs={this.state.favs} delete={this.deleteFav} />
+                        <div id="close" style={{ textAlign: 'right' }}>
+                            <Link to='./default'>
+                                <Button type="primary" danger>Close</Button>
+                            </Link>
+                        </div>
                         <span><i className="fas fa-spinner fa-spin"></i></span>
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
