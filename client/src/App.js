@@ -25,14 +25,19 @@ class App extends React.Component {
     try {
 
 
-      //      const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
+      // const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
 
-      // const url = "https://comp4513asg2.netlify.com/?fbclid=IwAR3Cb9YgYtF27-9QyYecFFDFrCATeUCi0STiMZMBBrx-y5-DdrYL7AmNZNg/api/brief";
+      const url = "https://comp4513asg2.herokuapp.com/api/users/1";
 
-      // const response = await fetch(url);
-      // const jsonData = await response.json();
+      const options = {
+        method: "GET",
+        mode: 'no-cors'
+      };
 
-      // this.setState({ movies: jsonData, loaded: true });
+      const response = await fetch(url, options);
+      const jsonData = await response.json();
+
+      this.setState({ movies: jsonData, loaded: true });
 
 
     } catch (error) {
@@ -91,8 +96,8 @@ class App extends React.Component {
               </CSSTransition>
             </TransitionGroup>
           )} />
-          <Route path="/moviedetails" exact component={MovieDetailsView} />
           <Route path="/profile" exact component={Profile} />
+          <Route path="/moviedetails" exact component={MovieDetailsView} />
           {/* <Route path="/castview" exact component={CastView} /> */}
           {/* <DefaultView movies={this.state.movies} addsFav={this.addToFavorite} /> */}
         </main>

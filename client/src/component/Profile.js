@@ -12,21 +12,16 @@ class Profile extends React.Component {
     async componentDidMount() {
         try {
 
-            fetch("https://comp4513asg2.herokuapp.com/api/users/1", {
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(async response => {
-                    if (response.ok) {
-                        this.apiError = false;
-                        this.result = await response.json();
-                    } else {
-                        this.apiError = true;
-                    }
-                })
-                .catch(() => (this.apiError = true))
+            let url = "https://comp4513asg2.herokuapp.com/api/users/1";
+            console.log("here");
+            const options = {
+                method: "GET",
+                mode: 'cors'
+            };
 
+            const resp = await fetch(url, options);
+            const data = await resp.json();
+            console.log(data);
 
         } catch (error) {
             console.error(error);
@@ -35,7 +30,7 @@ class Profile extends React.Component {
 
     render() {
         if (this.state.userData.length > 0) {
-            { console.log(this.state.userData); }
+            { console.log(this.state.userData[0]); }
             { console.log(this.state.userData.email) }
             return (
                 <div>
