@@ -3,6 +3,7 @@ import DefaultView from './component/DefaultView.js';
 import './App.css';
 import Home from "./component/Home.js";
 import MovieDetailsView from "./component/MovieDetailsView.js";
+import Profile from "./component/Profile.js";
 import { Route, Switch } from 'react-router-dom';
 // import CastView from "./component/CastView.js";
 import {
@@ -22,23 +23,23 @@ class App extends React.Component {
 
   async componentDidMount() {
     try {
-       if (JSON.parse(localStorage.getItem("movies"))) {
+      if (JSON.parse(localStorage.getItem("movies"))) {
 
-         this.setState({
-           movies: JSON.parse(localStorage.getItem("movies"))
-         });
-         this.setState({ loaded: true });
-       }
-       else {
-      const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
-           
-      //const url = "/api/brief";
+        this.setState({
+          movies: JSON.parse(localStorage.getItem("movies"))
+        });
+        this.setState({ loaded: true });
+      }
+      else {
+        const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
 
-      const response = await fetch(url);
-      const jsonData = await response.json();
-      localStorage.setItem("movies", JSON.stringify(jsonData));
-      this.setState({ movies: jsonData, loaded: true });
-       }
+        //const url = "/api/brief";
+
+        const response = await fetch(url);
+        const jsonData = await response.json();
+        localStorage.setItem("movies", JSON.stringify(jsonData));
+        this.setState({ movies: jsonData, loaded: true });
+      }
 
     } catch (error) {
       console.error(error);
@@ -97,6 +98,7 @@ class App extends React.Component {
             </TransitionGroup>
           )} />
           <Route path="/moviedetails" exact component={MovieDetailsView} />
+          <Route path="/profile" exact component={Profile} />
           {/* <Route path="/castview" exact component={CastView} /> */}
           {/* <DefaultView movies={this.state.movies} addsFav={this.addToFavorite} /> */}
         </main>
