@@ -12,16 +12,19 @@ class Profile extends React.Component {
     async componentDidMount() {
         try {
 
-            let url = "https://comp4513asg2.herokuapp.com/api/users/1";
-            console.log("here");
-            const options = {
-                method: "GET",
-                mode: 'cors'
-            };
+            const url = "https://comp4513asg2.herokuapp.com/api/users/1";
 
-            const resp = await fetch(url, options);
-            const data = await resp.json();
-            console.log(data);
+            //const url = "/api/brief";
+            const options = {
+                "Content-Type": "application/json",
+                "mode": "cors"
+            }
+
+            const response = await fetch(url, options);
+            const jsonData = await response.json({});
+            console.log(jsonData);
+            // localStorage.setItem("movies", JSON.stringify(jsonData));
+            this.setState({ userData: jsonData });
 
         } catch (error) {
             console.error(error);
