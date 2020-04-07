@@ -25,7 +25,7 @@ class App extends React.Component {
     try {
 
 
-      const url = "https://comp4513asg2.herokuapp.com/api/users/1";
+      const url = "https://comp4513asg2.herokuapp.com/api/brief";
 
       //const url = "/api/brief";
       const options = {
