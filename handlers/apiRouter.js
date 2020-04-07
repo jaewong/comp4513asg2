@@ -5,14 +5,10 @@ const MovieModel = require('../models/Movie.js');
 const BriefModel = require('../models/Brief.js');
 const helper = require('./helpers.js');
 const mongoose = require('mongoose');
-const cors = require('cors');
-const corsOptions = {
-   origin: 'https://comp4513asg2.netlify.com/'
-}
 
 const router = express.Router();
 
-router.get('/users/:id', cors(corsOptions), (req, resp) => {
+router.get('/users/:id', (req, resp) => {
    UserModel.find({ id: req.params.id }, (err, data) => {
       if (err) {
          resp.json({ message: 'User not found' });
