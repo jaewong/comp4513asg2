@@ -22,23 +22,19 @@ class App extends React.Component {
 
   async componentDidMount() {
     try {
-       if (JSON.parse(localStorage.getItem("movies"))) {
+      const url = "https://comp4513asg2.herokuapp.com/api/brief";
 
-         this.setState({
-           movies: JSON.parse(localStorage.getItem("movies"))
-         });
-         this.setState({ loaded: true });
-       }
-       else {
-      const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
-           
       //const url = "/api/brief";
+      const options = {
+        "Content-Type": "application/json",
+        "mode": "cors"
+      }
 
-      const response = await fetch(url);
-      const jsonData = await response.json();
-      localStorage.setItem("movies", JSON.stringify(jsonData));
+      const response = await fetch(url, options);
+      const jsonData = await response.json({});
+      console.log(jsonData);
+      // localStorage.setItem("movies", JSON.stringify(jsonData));
       this.setState({ movies: jsonData, loaded: true });
-       }
 
     } catch (error) {
       console.error(error);
