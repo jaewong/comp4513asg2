@@ -11,7 +11,7 @@ class Profile extends React.Component {
 
     async componentDidMount() {
         try {
-            const url = `https://localhost:5000/api/users/1`;
+            const url = `https://comp4513asg2.herokuapp.com/api/users/1`;
             const response = await fetch(url);
             const jsonData = await response.json();
             console.log(jsonData);
@@ -31,7 +31,6 @@ class Profile extends React.Component {
                     <div>{this.state.userData[0].details.city}, {this.state.userData[0].details.country}</div>
                     <img src={this.state.userData[0].picture.thumbnail} />
                     <div>{this.state.userData[0].membership.date_joined}</div>
-
                 </div>
             )
         }
