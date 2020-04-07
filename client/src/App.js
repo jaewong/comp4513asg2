@@ -19,13 +19,13 @@ class App extends React.Component {
     this.state = { movies: [] };
     this.state.favorites = [];
     this.state.loaded = false;
+    this.state.loggedin = false;
   }
 
   async componentDidMount() {
     try {
-
-
-      const url = "https://comp4513asg2.herokuapp.com/api/brief";
+      this.checkLoggedIn();
+      const url = "https://comp4513asg2.herokuapp.com/api/movies";
 
       //const url = "/api/brief";
       const options = {
@@ -38,8 +38,6 @@ class App extends React.Component {
       console.log(jsonData);
       // localStorage.setItem("movies", JSON.stringify(jsonData));
       this.setState({ movies: jsonData, loaded: true });
-
-
 
     } catch (error) {
       console.error(error);
@@ -74,6 +72,25 @@ class App extends React.Component {
 
     this.setState({ favorites: fav });
 
+  }
+
+  async checkLoggedIn() {
+    if (!this.state.loggedin) {
+      // window.location.href = "https://comp4513asg2.herokuapp.com";
+      const url = "https://comp4513asg2.herokuapp.com/";
+
+      //const url = "/api/brief";
+      const options = {
+        "Content-Type": "application/json",
+        "mode": "cors"
+      }
+
+      // const response = await fetch(url, options);
+      // const jsonData = await response.json({});
+      //console.log(jsonData);
+      // localStorage.setItem("movies", JSON.stringify(jsonData));
+      this.setState({ loggedin: true });
+    }
   }
 
   render() {
