@@ -36,7 +36,7 @@ class MovieDetailsView extends React.Component {
             const response = await fetch(url, options);
             const jsonData = await response.json({});
             console.log(jsonData);
-            this.setState({ movies: jsonData[0], loaded: true });
+            this.setState({ movieData: jsonData[0], loaded: true }, console.log(this.state.movieData));
 
         } catch (error) {
             console.error(error);
@@ -85,6 +85,7 @@ class MovieDetailsView extends React.Component {
 
     render() {
         let component = "";
+        console.log(this.state.movies)
 
         const { Content, Footer } = Layout;
 
