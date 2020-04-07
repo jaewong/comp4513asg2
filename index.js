@@ -8,6 +8,7 @@ var cors = require('cors');
 const passport = require('passport');
 const flash = require('express-flash');
 const mongoose = require('mongoose');
+// const cors = require('cors');
 
 // use .env file for configuration constants
 require('dotenv').config();
@@ -18,7 +19,6 @@ const app = express();
 // mongoose.connect(process.env.MONGODB_URI || `mongodb://localhost:27017/node-react-starter`);
 
 require('./handlers/dataConnector.js').connect();
-
 
 // view engine setup
 app.use(expressLayouts);
