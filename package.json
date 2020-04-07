@@ -1,6 +1,7 @@
 {
   "name": "comp4513asg2",
   "version": "1.0.0",
+  "proxy": "http://localhost:5000",
   "description": "",
   "main": "index.js",
   "engines": {
@@ -20,6 +21,7 @@
     "bcryptjs": "^2.4.3",
     "concurrently": "^5.1.0",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
     "express": "^4.17.1",
