@@ -23,6 +23,7 @@ class App extends React.Component {
 
   async componentDidMount() {
     try {
+      this.checkLoggedIn();
       const url = "https://comp4513asg2.herokuapp.com/api/movies";
 
       //const url = "/api/brief";
@@ -72,9 +73,9 @@ class App extends React.Component {
 
   }
 
-  checkLoggedIn = () => {
+  async checkLoggedIn() {
     if (!this.state.loggedin) {
-      window.location.href = "https://comp4513asg2.herokuapp.com";
+      // window.location.href = "https://comp4513asg2.herokuapp.com";
       const url = "https://comp4513asg2.herokuapp.com/";
 
       //const url = "/api/brief";
@@ -92,8 +93,7 @@ class App extends React.Component {
   }
 
   render() {
-    this.checkLoggedIn();
-    if (this.state.loaded && this.state.loggedin) {
+    if (this.state.loaded) {
       return (
         <main>
           {/* Used this Tutorial https://www.youtube.com/watch?v=NUQkajBdnmQ , https://github.com/Ihatetomatoes/react-router-page-transition-css */}

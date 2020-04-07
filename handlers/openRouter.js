@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const helper = require('./helpers.js');
+const cors = require('cors');
 
 // Welcome Page
-router.get('/', helper.ensureAuthenticated, (req, resp) => {
+router.get('/', cors(), helper.ensureAuthenticated, (req, resp) => {
    resp.writeHead(301,
       { Location: 'https://comp4513asg2.netlify.com' }
    );
