@@ -152,7 +152,11 @@ class DefaultView extends React.Component {
     }
 
     render() {
+<<<<<<< HEAD
         const { Content, Footer } = Layout;
+=======
+        const { Content , Footer } = Layout;
+>>>>>>> e567c881e4e7434c3ac2e59785d76f0010efc219
         if (this.props.loaded) {
             if (!this.state.showFiltered) {
                 return (
