@@ -98,6 +98,71 @@ router.get('/brief', cors(), (req, resp) => {
 })
 
 
+//get used favorites
+router.get('/favorites/:id', cors() , (req, resp) => {
+   UserModel.find({ id: req.params.id }, (err, data) => {
+       if(err) {
+           resp.json({ message: 'User not found' });
+       } else {
+//            console.log(data.favorites);
+           resp.json(data[0].favorites);
+       }
+   });
+});
+
+
+
+
+//post a new favorite
+router.post('/favorites/:id', cors() , (req, resp) => {
+   UserModel.find({ id: req.params.id }, (err, data) => {
+       
+       const userId = req.body.id;
+       
+       let index = _.findIndex(data[0].favorites, ['id', movieToAdd]);
+       
+       if(index < 0)
+           {
+               let newMovie = req.body;
+               
+               data[0].favorites.push(newMovie);
+               
+               resp.json(data[0].favorites);
+           }
+       else {
+           resp.json(jsonMessage(`Movie ${movieToAdd} already exist! Cant add a new movie`));
+       
+       
+       }
+//        if(err) {
+//            resp.json({ message: 'User not found'});
+//        } else {
+//            
+//            data[0].favorites.push(req.body);
+////            resp.json(data[0].favorites);
+//        }
+   });
+});
+
+
+
+//delete a favorite
+router.delete('/favorites/:id' , helper.ensureAuthenticated, (req, resp) => {
+   UserModel.find({ id: req.params.id }, (err, data) => {
+       const movieToDelete = req.body.id;
+       let index = _.findIndex(data[0].favorites, ['id', movieToDelete]);
+       
+       if(index < 0) {
+           resp.json({ message: 'User not found' });
+       } else {
+           _.remove(data[0].favorites, _.find(data[0].favorites, ['id', movieToDelete]));
+           
+           resp.json(data[0].favorites);
+       }
+   });
+})
+
+
 
 
 module.exports = router;
