@@ -20,13 +20,6 @@ class Profile extends React.Component {
                 "Content-Type": "application/json",
                 "mode": "cors"
             }
-
-            const response = await fetch(url, options);
-            const jsonData = await response.json({});
-            console.log(jsonData);
-            // localStorage.setItem("movies", JSON.stringify(jsonData));
-            this.setState({ userData: jsonData });
-            const url = `/api/users/1`;
             const response = await fetch(url);
             const jsonData = await response.json();
             this.setState({ userData: jsonData }, console.log(this.state.userData));
