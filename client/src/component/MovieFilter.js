@@ -115,29 +115,46 @@ class MovieFilter extends React.Component {
                     </Space>
 
                     <Form onFinish={this.done} onFinishFailed={this.onFinishFailed} name="filter-form" id="filterForm">
-                        <Form.Item>
-                            <Title level={4}>Title</Title>
+                        <Form.Item
+                            name="title"
+                            label="Title"
+                        >
                             <Input label="Title" name="title" />
                         </Form.Item>
 
-                        <Form.Item className="filterYear">
-                            <Title level={4}>Year</Title>
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}>Between:</Col>
-                                <Col span={8}><Input label="beforeNum" name="beforeNum" /></Col>
-                                <Col span={8}><Input label="afterNum" name="afterNum" /></Col>
-                            </Row>
-                        </Form.Item>
+                        <Title level={4}>Year</Title>
+                        <Row gutter={[8, 8]}>
+                            <Col span={5}>Between: </Col>
+                            <Col span={8}>
+                                <Form.Item
+                                    name="yearBefore">
+                                    <Input label="beforeNum" name="beforeNum" />
+                                </Form.Item>
+                            </Col>
+                            <Col span={8}>
+                                <Form.Item
+                                    name="yearAfter">
+                                    <Input label="afterNum" name="afterNum" />
+                                </Form.Item>
+                            </Col>
+                        </Row>
 
-                        <Form.Item className="filterRating">
-
-                            <Title level={4}>Rating</Title>
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}>Between:</Col>
-                                <Col span={8}><Input label="minRating" name="minRating" /></Col>
-                                <Col span={8}><Input label="maxRating" name="maxRating" /></Col>
-                            </Row>
-                        </Form.Item>
+                        <Title level={4}>Rating</Title>
+                        <Row gutter={[8, 8]}>
+                            <Col span={5}>Between: </Col>
+                            <Col span={8}>
+                                <Form.Item
+                                        name="rateBefore">
+                                    <Input label="minRating" name="minRating" />
+                                </Form.Item>
+                            </Col>
+                            <Col span={8}>
+                                <Form.Item
+                                            name="rateAfter">
+                                    <Input label="maxRating" name="maxRating" />
+                                </Form.Item>
+                            </Col>
+                        </Row>
 
                         <Space>
                             <Button type="primary" htmlType="submit">Filter</Button>
@@ -145,7 +162,7 @@ class MovieFilter extends React.Component {
                         </Space>
                     </Form>
                 </Drawer>
-            </div>
+            </div >
         );
     }
 
