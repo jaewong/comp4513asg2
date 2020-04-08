@@ -13,7 +13,6 @@ class Profile extends React.Component {
 
     async componentDidMount() {
         try {
-
             const url = "https://comp4513asg2.herokuapp.com/api/users/1";
 
             //const url = "/api/brief";
@@ -21,13 +20,9 @@ class Profile extends React.Component {
                 "Content-Type": "application/json",
                 "mode": "cors"
             }
-
-            const response = await fetch(url, options);
-            const jsonData = await response.json({});
-            console.log(jsonData);
-            // localStorage.setItem("movies", JSON.stringify(jsonData));
-            this.setState({ userData: jsonData });
-
+            const response = await fetch(url);
+            const jsonData = await response.json();
+            this.setState({ userData: jsonData }, console.log(this.state.userData));
         } catch (error) {
             console.error(error);
         }
@@ -38,8 +33,6 @@ class Profile extends React.Component {
         const { Text } = Typography;
 
         if (this.state.userData.length > 0) {
-            { console.log(this.state.userData[0]); }
-            { console.log(this.state.userData.email) }
             return (
                 <Space direction="vertical">
                     <div id="profileImg">
