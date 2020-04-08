@@ -51,6 +51,11 @@ class HeaderApp extends React.Component {
         });
     };
 
+    logout = () => {
+        //Delete JWT
+        window.location.href='https://comp4513asg2.herokuapp.com/logout';
+    }
+
     render() {
         /* Ant Design Variable */
         const { Header } = Layout;
@@ -74,10 +79,10 @@ class HeaderApp extends React.Component {
                         <About />
                     </Modal>
                     {/* Logout Nav Button */}
-                    <Menu.Item key="3">Logout</Menu.Item>
+                    <Menu.Item key="3" onClick={this.logout}>Logout</Menu.Item>
                 </Menu>
                 {/* Profile Drawer */}
-                <Drawer
+                <Drawer 
                         title="User Profile"
                         placement="right"
                         onClose={this.onClose}

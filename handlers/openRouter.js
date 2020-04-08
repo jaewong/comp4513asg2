@@ -6,7 +6,7 @@ const cors = require('cors');
 
 // Welcome Page
 router.get('/', cors(), helper.ensureAuthenticated, (req, resp) => {
-   resp.end();
+   resp.redirect("https://comp4513asg2.netlify.com");
 });
 
 // redirects to login.ejs
