@@ -89,6 +89,11 @@ class MovieFilter extends React.Component {
         console.log(values);
     }
 
+    onFinishFailed = errorInfo => {
+        console.log(errorInfo);
+
+    }
+
     render() {
         const { Title } = Typography;
         return (
@@ -109,7 +114,7 @@ class MovieFilter extends React.Component {
                         <Button onClick={this.filterRating}>By Rating</Button>
                     </Space>
 
-                    <Form onFinish={this.done} name="filter-form" id="filterForm">
+                    <Form onFinish={this.done} onFinishFailed={this.onFinishFailed} name="filter-form" id="filterForm">
                         <Form.Item>
                             <Title level={4}>Title</Title>
                             <Input label="Title" name="title" />
