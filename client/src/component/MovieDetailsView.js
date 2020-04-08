@@ -6,7 +6,7 @@ import Favorites from './Favorites.js';
 import CastView from './CastView.js';
 import "../css/MovieDetails.css";
 import { Link } from 'react-router-dom';
-import { Row, Col, Layout, Button } from 'antd';
+import { Row, Col, Layout, Button, Spin } from 'antd';
 
 class MovieDetailsView extends React.Component {
 
@@ -110,7 +110,7 @@ class MovieDetailsView extends React.Component {
                             <Col flex="2"><DetailTabs movieData={this.state.movieData} toggle={this.castViewOn} /></Col>
                         </Row>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
+                    <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2020 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
                 </Layout>
             );
         }
@@ -125,9 +125,11 @@ class MovieDetailsView extends React.Component {
                                 <Button type="primary" danger>Close</Button>
                             </Link>
                         </div>
-                        <span><i className="fas fa-spinner fa-spin"></i></span>
+                        <Row justify="center" align="middle" className="load">
+                            <Spin size="large" tip="Loading..." />
+                        </Row>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
+                    <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2020 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
                 </Layout>
             );
         }

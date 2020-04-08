@@ -5,6 +5,7 @@ import Home from "./component/Home.js";
 import MovieDetailsView from "./component/MovieDetailsView.js";
 import Profile from "./component/Profile.js";
 import { Route, Switch } from 'react-router-dom';
+import { Spin, Row } from 'antd';
 // import CastView from "./component/CastView.js";
 import {
   CSSTransition,
@@ -121,7 +122,11 @@ class App extends React.Component {
       );
     }
     else {
-      return (<span stle={{ textAlign: 'center' }}><i className="fas fa-spinner fa-spin fa fa-7x"></i></span>);
+      return (
+        <Row justify="center" align="middle" className="load">
+          <Spin size="large" tip="Loading..." />
+        </Row>
+      );
     }
   }
 

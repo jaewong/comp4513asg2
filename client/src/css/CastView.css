@@ -1,27 +1,30 @@
 #cast-view{
-    display: grid;
-    grid-template-columns: auto auto;
-    background: var(--light-blue);
-    font-size: 0.8em;   
-
+    border-radius: 10px;
+    background: #f0f0f0;
+    padding: 1em;
 }
 
 #cast-view-info{
-    /* padding: 3em; */
-    background: var(--light-blue);
+    background: #f5f5f5;
 }
 
-#cast-view-info *{
+#cast-view-info {
     margin: 0.5em;
     padding: 1em;
 }
 
+#cast-view-info button{
+    float: right;
+}
 
 #cast-view-info #biography{
     height: 20em;
     padding: 2em;
     overflow: auto;
-    background: var(--blue-focus);
+    background: white;
+    margin-bottom: 2em;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #cast-view #cast-view-photo{
@@ -29,6 +32,5 @@
 }
 
 #cast-image{
-    padding: 2em;
-    background: white;
+    padding: 0 2em;
 }

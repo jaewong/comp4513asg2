@@ -4,13 +4,12 @@ import Header from './HeaderApp.js';
 import FilteredMovieList from './FilteredMovieList.js';
 import Favorites from './Favorites.js';
 
-import { Layout } from 'antd';
+import { Layout, Spin, Row } from 'antd';
 
 class DefaultView extends React.Component {
     constructor(props) {
         super(props);
         this.state = { movies: this.filterTitle(this.props.movies), loaded: false };
-        //        this.state = { title: "", yearBefore: "", ratingBefore: "" };
 
         this.state.title = '';
         this.state.minYear = '';
@@ -34,19 +33,22 @@ class DefaultView extends React.Component {
 
 
     filterMovie = (title, minYear, maxYear, minRating, maxRating) => {
-
+        console.log("hi");
         if (title) {
             console.log("******   " + title);
 
 
             this.setState({ title: title }, function () { console.log(this.state.title) });
 
-            const url = `/api/find/title/${title}`;
-            //                const url = `/api/movies/2`;
-            //        const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
+            const url = `https://comp4513asg2.herokuapp.com/api/find/title/${title}`;
             console.log("IN mount");
 
-            fetch(url)
+            const options = {
+                "Content-Type": "application/json",
+                "mode": "cors"
+            }
+
+            fetch(url, options)
                 .then(function (response) {
                     return response.json();
                 })
@@ -54,7 +56,7 @@ class DefaultView extends React.Component {
                     let sortedMovies = data.sort((a, b) => {
                         return a.title < b.title ? -1 : 1;
                     })
-
+                    console.log(sortedMovies);
                     this.setState({ filteredMovies: sortedMovies, showFiltered: true });
                 })
         };
@@ -63,9 +65,13 @@ class DefaultView extends React.Component {
             console.log(minYear);
 
             this.setState({ minYear: minYear, maxYear: maxYear });
-            const url = `api/find/year/${minYear}/${maxYear}`;
+            const url = `https://comp4513asg2.herokuapp.com/api/find/year/${minYear}/${maxYear}`;
+            const options = {
+                "Content-Type": "application/json",
+                "mode": "cors"
+            }
 
-            fetch(url)
+            fetch(url, options)
                 .then(function (response) {
                     return response.json();
                 })
@@ -89,9 +95,13 @@ class DefaultView extends React.Component {
             console.log(minYear);
 
             this.setState({ minRating: minRating, maxRating: maxRating });
-            const url = `api/find/rating/${minRating}/${maxRating}`;
+            const url = `https://comp4513asg2.herokuapp.com/api/find/rating/${minRating}/${maxRating}`;
+            const options = {
+                "Content-Type": "application/json",
+                "mode": "cors"
+            }
 
-            fetch(url)
+            fetch(url, options)
                 .then(function (response) {
                     return response.json();
                 })
@@ -152,11 +162,9 @@ class DefaultView extends React.Component {
     }
 
     render() {
-<<<<<<< HEAD
-        const { Content, Footer } = Layout;
-=======
+
         const { Content , Footer } = Layout;
->>>>>>> e567c881e4e7434c3ac2e59785d76f0010efc219
+
         if (this.props.loaded) {
             if (!this.state.showFiltered) {
                 return (
@@ -178,7 +186,7 @@ class DefaultView extends React.Component {
                             <Favorites favs={this.props.favsList} delete={this.deleteFav} />
                             <FilteredMovieList loaded={this.props.loaded} filterRating={this.filterRating} filterYear={this.filterYear} filterTitle={this.filterTitle} favsList={this.props.favsList} movies={this.state.filteredMovies} addFav={this.addFav} filterMovie={this.filterMovie} clearFilter={this.clearFilter} />
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
+                        <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2020 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
                     </Layout>
                 );
             }
@@ -188,9 +196,11 @@ class DefaultView extends React.Component {
                     <Header />
                     <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
                         <Favorites favs={this.props.favs} />
-                        <span><i className="fas fa-spinner fa-spin"></i></span>
+                        <Row justify="center" align="middle" className="load">
+                            <Spin size="large" tip="Loading..." />
+                        </Row>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
+                    <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2020 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
                 </Layout>
             );
 
