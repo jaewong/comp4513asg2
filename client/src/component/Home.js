@@ -32,6 +32,8 @@ class Home extends React.Component {
         const { Title } = Typography;
         const { Search } = Input;
 
+
+        console.log("home");
         return (
             <Row id="banner"
                 style={{

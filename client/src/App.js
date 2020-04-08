@@ -101,6 +101,7 @@ class App extends React.Component {
   /** Includes transition/animation on Home and Default View pages **/
   render() {
     if (this.state.loaded) {
+      console.log("loaded");
       return (
         <main>
           {/* Used this Tutorial https://www.youtube.com/watch?v=NUQkajBdnmQ , https://github.com/Ihatetomatoes/react-router-page-transition-css */}
@@ -114,7 +115,7 @@ class App extends React.Component {
               >
                 <Switch location={location}>
                   {/* Home Component Route */}
-                  <Route path="/" exact component={Home}/>
+                  <Route path="/" exact component={Home} />
                   {/* Default View Component Route */}
                   <Route path="/default" exact render={() =>
                     <DefaultView loaded={this.state.loaded} movies={this.state.movies} favsList={this.state.favorites} addsFav={this.addToFavorite} deletesFav={this.deleteFromFavorite} />
@@ -124,7 +125,7 @@ class App extends React.Component {
             </TransitionGroup>
           )}/>
           {/* Movie Details Component Route */}
-          <Route path="/moviedetails" exact component={MovieDetailsView}/>
+          <Route path="/moviedetails" exact component={MovieDetailsView} />
         </main>
       );
     }
