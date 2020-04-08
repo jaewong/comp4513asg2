@@ -32,8 +32,14 @@ class DefaultView extends React.Component {
     }
 
 
-    filterMovie = (title, minYear, maxYear, minRating, maxRating) => {
-        console.log("hi");
+    filterMovie = (values) => {
+
+        let title = values.title;
+        let minYear = values.yearBefore;
+        let maxYear = values.yearAfter;
+        let minRating = values.rateBefore;
+        let maxRating = values.rateAfter;
+
         if (title) {
             console.log("******   " + title);
 
@@ -59,12 +65,8 @@ class DefaultView extends React.Component {
                     console.log(sortedMovies);
                     this.setState({ filteredMovies: sortedMovies, showFiltered: true });
                 })
-        };
+        } else if (minYear && maxYear) {
 
-        if (minYear || maxYear) {
-            console.log(minYear);
-
-            this.setState({ minYear: minYear, maxYear: maxYear });
             const url = `https://comp4513asg2.herokuapp.com/api/find/year/${minYear}/${maxYear}`;
             const options = {
                 "Content-Type": "application/json",
@@ -76,25 +78,22 @@ class DefaultView extends React.Component {
                     return response.json();
                 })
                 .then(data => {
+                    if (!data.message) {
+                        data.sort((a, b) => {
+                            var x = a.release_date.substring(0, 4);
+                            var y = b.release_date.substring(0, 4);
+                            if (x < y) { return -1; }
+                            if (x > y) { return 1; }
+                            return 0;
+                        })
+                    } else {
+                        data = [];
+                    }
 
-                    data.sort((a, b) => {
-                        var x = a.release_date.substring(0, 4);
-                        var y = b.release_date.substring(0, 4);
-                        if (x < y) { return -1; }
-                        if (x > y) { return 1; }
-                        return 0;
-                    })
-
-                    console.log(data);
                     this.setState({ filteredMovies: data, showFiltered: true });
                 })
-        }
+        } else if (minRating && maxRating) {
 
-        if (minRating || maxRating) {
-
-            console.log(minYear);
-
-            this.setState({ minRating: minRating, maxRating: maxRating });
             const url = `https://comp4513asg2.herokuapp.com/api/find/rating/${minRating}/${maxRating}`;
             const options = {
                 "Content-Type": "application/json",
@@ -106,21 +105,22 @@ class DefaultView extends React.Component {
                     return response.json();
                 })
                 .then(data => {
-
-                    data.sort((a, b) => {
-                        var x = a.rating;
-                        var y = b.rating;
-                        if (x < y) { return -1; }
-                        if (x > y) { return 1; }
-                        return 0;
-                    })
+                    if (!data.message) {
+                        data.sort((a, b) => {
+                            var x = a.ratings.average;
+                            var y = b.ratings.average;
+                            if (x < y) { return -1; }
+                            if (x > y) { return 1; }
+                            return 0;
+                        })
+                    } else {
+                        data = [];
+                    }
 
                     console.log(data);
                     this.setState({ filteredMovies: data, showFiltered: true });
                 })
         }
-
-
     }
 
 
