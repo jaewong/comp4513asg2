@@ -17,12 +17,12 @@ class About extends React.Component {
                     </div>
                     <div>
                         <Title level={4}>Github?</Title>
-                        <div> Yes. <a href="https://github.com/nbesh761/COMP-4513-React-Assignment">https://github.com/jaewong/comp4513asg2</a> (It's public ..)</div>
+                        <div> Yes. <a href="https://github.com/jaewong/comp4513asg2">https://github.com/jaewong/comp4513asg2</a> (It's public ..)</div>
                     </div>
                     <div>
                         <Title level={4}>What was used?</Title>
                         <div>
-                            VS Code, Brackets, GitHub, Heroku, Netlify, Ant Design
+                            VS Code, Brackets, GitHub, Git, MongoDB, Node.js, Express, React, Ant Design, Heroku, Netlify
                         </div>
                     </div>
                     <div>

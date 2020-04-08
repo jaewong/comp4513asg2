@@ -3,6 +3,7 @@ const expressLayouts = require('express-ejs-layouts');
 const parser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+var cors = require('cors');
 /* ----- add new requires here ------- */
 const passport = require('passport');
 const flash = require('express-flash');
@@ -27,9 +28,12 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use('/static', express.static('public'));
 
+app.use(cors());
+
 // setup express middleware
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
+
 
 // Express session
 app.use(cookieParser('oreos'));
@@ -66,14 +70,15 @@ app.use(function (err, req, res, next) {
     res.json({ error: err });
 });
 
-app.use(parser.json());
+
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
+    app.use(express.static(path.join(__dirname, 'client/build')));
 
     const path = require('path');
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+        // res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+        res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
     })
 
 }
