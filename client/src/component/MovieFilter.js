@@ -45,44 +45,10 @@ class MovieFilter extends React.Component {
     filterYear = () => { this.props.filterYear(this.props.movieList); }
     filterTitle = () => { this.props.filterTitle(this.props.movieList); }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
+    handleSubmit = values => {
 
-        let titleValue = "";
-        let minYear = "";
-        let maxYear = "";
-        let minRating = "";
-        let maxRating = "";
-
-        if (this.title.current.value !== "") {
-            titleValue = `${this.title.current.value}`;
-            console.log("has title");
-        }
-
-        if (this.state.yearRadio === "yearBefore") {
-            maxYear = this.yearBefore.current.value;
-        }
-        else if (this.state.yearRadio === "yearAfter") {
-            minYear = this.yearAfter.current.value;
-        }
-        else if (this.state.yearRadio === "yearBetween") {
-            minYear = this.yearMin.current.value;
-            maxYear = this.yearMax.current.value;
-        }
-
-        if (this.state.ratingRadio === "ratingBelow") {
-            maxRating = this.ratingBelow.current.value;
-        }
-        else if (this.state.ratingRadio === "ratingAbove") {
-            minRating = this.ratingAbove.current.value;
-        }
-        else if (this.state.ratingRadio === "ratingBetween") {
-            minRating = this.ratingMin.current.value;
-            maxRating = this.ratingMax.current.value;
-        }
-
-        console.log("hi");
-        this.props.filterMovie(titleValue, minYear, maxYear, minRating, maxRating);
+        console.log(values);
+        this.props.filterMovie(values);
     }
 
     render() {
@@ -105,7 +71,7 @@ class MovieFilter extends React.Component {
                         <Button onClick={this.filterRating}>By Rating</Button>
                     </Space>
 
-                    <Form onFinish={this.done} onFinishFailed={this.onFinishFailed} name="filter-form" id="filterForm">
+                    <Form onFinish={this.handleSubmit} onFinishFailed={this.onFinishFailed} name="filter-form" id="filterForm">
                         <Form.Item
                             name="title"
                             label="Title"
@@ -148,7 +114,7 @@ class MovieFilter extends React.Component {
                         </Row>
 
                         <Space>
-                            <Button type="primary">Filter</Button>
+                            <Button type="primary" htmlType="submit">Filter</Button>
                             <Button type="primary" onClick={this.props.clearFilter}>Clear</Button>
                         </Space>
                     </Form>
