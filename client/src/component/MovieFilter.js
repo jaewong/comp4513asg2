@@ -122,17 +122,8 @@ class MovieFilter extends React.Component {
 
                         <Form.Item className="filterYear">
                             <Title level={4}>Year</Title>
-
                             <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="yearBefore" name="yearBefore" checked={this.state.yearRadio === "yearBefore"}  >Before</Radio></Col>
-                                <Col span={8}><Input label="beforeNum" name="beforeNum" ref={this.yearBefore} /></Col>
-                            </Row>
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="yearAfter" name="yearAfter" checked={this.state.yearRadio === "yearAfter"} >After</Radio></Col>
-                                <Col span={8}><Input label="afterNum" name="afterNum" ref={this.yearAfter} /></Col>
-                            </Row>
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="yearBetween" name="yearBetween" checked={this.state.yearRadio === "yearBetween"} >Between</Radio></Col>
+                                <Col span={8}>Between:</Col>
                                 <Col span={8}><Input label="beforeNum" name="beforeNum" /></Col>
                                 <Col span={8}><Input label="afterNum" name="afterNum" /></Col>
                             </Row>
@@ -142,15 +133,7 @@ class MovieFilter extends React.Component {
 
                             <Title level={4}>Rating</Title>
                             <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="ratingBelow" name="ratingBelow" checked={this.state.ratingRadio === "ratingBelow"} >Below</Radio></Col>
-                                <Col span={8}><Input label="ratingBelow" name="ratingBelow" /></Col>
-                            </Row>
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="ratingAbove" name="ratingAbove" checked={this.state.ratingRadio === "ratingAbove"} >Above</Radio></Col>
-                                <Col span={8}><Input label="ratingAbove" name="ratingAbove" /></Col>
-                            </Row>
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="ratingBetween" name="ratingBetween" checked={this.state.ratingRadio === "ratingBetween"} >Between</Radio></Col>
+                                <Col span={8}>Between:</Col>
                                 <Col span={8}><Input label="minRating" name="minRating" /></Col>
                                 <Col span={8}><Input label="maxRating" name="maxRating" /></Col>
                             </Row>
