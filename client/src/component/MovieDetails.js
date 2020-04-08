@@ -1,6 +1,6 @@
 import React from "react";
 import Ratings from './Ratings.js';
-import { Row, Col, Button, Typography, Modal, Card, Space, Descriptions, Tag, Divider} from 'antd';
+import { Row, Col, Button, Typography, Modal, Card, Space, Descriptions, Tag, Divider } from 'antd';
 
 class MovieDetails extends React.Component {
     constructor(props) {
@@ -55,24 +55,24 @@ class MovieDetails extends React.Component {
 
         return (
             <Row id="details">
-                <Modal 
+                <Modal
                     title="Poster"
                     visible={this.state.visible}
                     onCancel={this.hideModal}
                     closable
                     footer={null}
                 >
-                    <img src={imgUrl} id="modalPoster"/>
+                    <img src={imgUrl} id="modalPoster" />
                 </Modal>
 
                 <Col flex="2" className="detailsCol" id="poster">
                     <Title>{this.props.movieData.title}</Title>
-                    <Card 
+                    <Card
                         id="poster"
                         hoverable
                         cover={<img src={imgUrl} />}
                         onClick={this.showModal}
-                        style={{width: 400}}
+                        style={{ width: 400 }}
                     >
                         <Meta title={this.props.movieData.tagline} />
                         <div>{this.props.movieData.runtime} mins</div>
@@ -85,7 +85,7 @@ class MovieDetails extends React.Component {
                             It was released in {this.props.movieData.release_date} and had a revenue of ${this.props.movieData.revenue}.
                             <Divider orientation="left">
                                 <Space>
-                                    <Button type="dashed" href={"https://www.themoviedb.org/movie/" + this.props.movieData.tmdb_id}>TMDB</Button> 
+                                    <Button type="dashed" href={"https://www.themoviedb.org/movie/" + this.props.movieData.tmdb_id}>TMDB</Button>
                                     <Button type="dashed" href={"https://www.imdb.com/title" + this.props.movieData.imdb_id}>IMDB</Button>
                                 </Space>
                             </Divider>
@@ -93,7 +93,7 @@ class MovieDetails extends React.Component {
                         <div id='details-overview'>
                             {this.props.movieData.details.overview}
                         </div>
-                        
+
                         <Descriptions column={1} bordered>
                             <Descriptions.Item label="Popularity">{this.props.movieData.ratings.popularity}</Descriptions.Item>
                             <Descriptions.Item label="Average Rating"><Ratings rating={this.props.movieData.ratings.average} /> </Descriptions.Item>

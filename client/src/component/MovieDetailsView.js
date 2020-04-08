@@ -25,12 +25,18 @@ class MovieDetailsView extends React.Component {
 
     async componentDidMount() {
         try {
-            const url = `https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies.php?id=${this.props.location.state.id}`;
+            const url = `https://comp4513asg2.herokuapp.com/api/movies/${this.props.location.state.id}`;
 
-            const response = await fetch(url);
-            const jsonData = await response.json();
+            //const url = "/api/brief";
+            const options = {
+                "Content-Type": "application/json",
+                "mode": "cors"
+            }
 
-            this.setState({ movieData: jsonData, loaded: true });
+            const response = await fetch(url, options);
+            const jsonData = await response.json({});
+            console.log(jsonData);
+            this.setState({ movieData: jsonData[0], loaded: true }, console.log(this.state.movieData));
 
         } catch (error) {
             console.error(error);
@@ -79,6 +85,7 @@ class MovieDetailsView extends React.Component {
 
     render() {
         let component = "";
+        console.log(this.state.movies)
 
         const { Content, Footer } = Layout;
 
