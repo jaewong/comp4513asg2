@@ -120,7 +120,6 @@ class DefaultView extends React.Component {
                 })
         }
 
-
     }
 
 

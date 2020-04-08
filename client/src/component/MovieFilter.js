@@ -113,54 +113,20 @@ class MovieFilter extends React.Component {
 
                         <Form.Item className="filterYear">
                             <Title level={4}>Year</Title>
-                            <div>
-                                <div>
-                                    <Row gutter={[8, 8]}>
-                                        <Col span={8}><Radio name="yearBefore" checked={this.state.yearRadio === "yearBefore"} onChange={this.consoleYear} ref={this.yearBeforeRadio}>Before</Radio></Col>
-                                        <Col span={8}><Input name="beforeNum" ref={this.yearBefore} /></Col>
-                                    </Row>
-                                </div>
-                                <div>
-                                    <Row gutter={[8, 8]}>
-                                        <Col span={8}><Radio name="yearAfter" checked={this.state.yearRadio === "yearAfter"} onChange={this.consoleYear} ref={this.yearAfterRadio}>After</Radio></Col>
-                                        <Col span={8}><Input name="afterNum" ref={this.yearAfter} /></Col>
-                                    </Row>
-                                </div>
-
-                                <div>
-                                    <Row gutter={[8, 8]}>
-                                        <Col span={8}><Radio name="yearBetween" checked={this.state.yearRadio === "yearBetween"} onChange={this.consoleYear} ref={this.yearBetweenRadio}>Between</Radio></Col>
-                                        <Col span={8}><Input name="beforeNum" ref={this.yearMin} /></Col>
-                                        <Col span={8}><Input name="beforeNum" ref={this.yearMax} /></Col>
-                                    </Row>
-                                </div>
-                            </div>
+                            <Row gutter={[8, 8]}>
+                                <Col span={8}>Between:</Col>
+                                <Col span={8}><Input label="beforeNum" name="beforeNum" /></Col>
+                                <Col span={8}><Input label="afterNum" name="afterNum" /></Col>
+                            </Row>
                         </Form.Item>
 
                         <Form.Item className="filterRating">
-
                             <Title level={4}>Rating</Title>
-                            <div>
-                                <div>
-                                    <Row gutter={[8, 8]}>
-                                        <Col span={8}><Radio name="ratingBelow" checked={this.state.ratingRadio === "ratingBelow"} onChange={this.consoleRating} ref={this.ratingBelowRadio}>Below</Radio></Col>
-                                        <Col span={8}><Input name="ratingBelow" ref={this.ratingBelow} /></Col>
-                                    </Row>
-                                </div>
-                                <div>
-                                    <Row gutter={[8, 8]}>
-                                        <Col span={8}><Radio name="ratingAbove" checked={this.state.ratingRadio === "ratingAbove"} onChange={this.consoleRating} ref={this.ratingAboveRadio}>Above</Radio></Col>
-                                        <Col span={8}><Input name="ratingAbove" ref={this.ratingAbove} /></Col>
-                                    </Row>
-                                </div>
-                                <div>
-                                    <Row gutter={[8, 8]}>
-                                        <Col span={8}><Radio name="ratingBetween" checked={this.state.ratingRadio === "ratingBetween"} onChange={this.consoleRating} ref={this.ratingBetweenRadio}>Between</Radio></Col>
-                                        <Col span={8}><Input name="minRating" ref={this.ratingMin} /></Col>
-                                        <Col span={8}><Input name="maxRating" ref={this.ratingMax} /></Col>
-                                    </Row>
-                                </div>
-                            </div>
+                            <Row gutter={[8, 8]}>
+                                <Col span={8}>Between:</Col>
+                                <Col span={8}><Input label="minRating" name="minRating" /></Col>
+                                <Col span={8}><Input label="maxRating" name="maxRating" /></Col>
+                            </Row>
                         </Form.Item>
 
                         <Space>
