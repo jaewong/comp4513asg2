@@ -162,7 +162,9 @@ class DefaultView extends React.Component {
     }
 
     render() {
-        const { Content, Footer } = Layout;
+
+        const { Content , Footer } = Layout;
+
         if (this.props.loaded) {
             if (!this.state.showFiltered) {
                 return (
