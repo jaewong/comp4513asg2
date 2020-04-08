@@ -30,7 +30,7 @@ class App extends React.Component {
     this.state.jwt = "";
     this.state.favorites = [];
     this.state.loaded = false;
-    this.state.loggedin = false;
+    //this.state.loggedin = false;
   }
 
   /** Fetching of API**/
@@ -56,18 +56,18 @@ class App extends React.Component {
   }
 
   /** Check Login **/
-  loggedin = () => {
-    //Login conition
-    return false; 
-  }
+  // loggedin = () => {
+  //   //Login conition
+  //   return false; 
+  // }
 
-  /** Authentication **/
-  authCheck = () => {
-    console.log("goign to heroku");
-    // if(!this.loggedin()){
-    //   window.location.replace('https://comp4513asg2.herokuapp.com/');
-    // }
-  }
+  // /** Authentication **/
+  // authCheck = () => {
+  //   console.log("goign to heroku");
+  //   // if(!this.loggedin()){
+  //   //   window.location.replace('https://comp4513asg2.herokuapp.com/');
+  //   // }
+  // }
 
   /** Add to Favorites function **/
   addToFavorite = (poster) => {
@@ -106,7 +106,6 @@ class App extends React.Component {
         <main>
           {/* Used this Tutorial https://www.youtube.com/watch?v=NUQkajBdnmQ , https://github.com/Ihatetomatoes/react-router-page-transition-css */}
           <Route  render={({ location }) => (
-            // Animations/Transition
             <TransitionGroup>
               <CSSTransition
                 key={location.key}
@@ -114,23 +113,23 @@ class App extends React.Component {
                 classNames="fade"
               >
                 <Switch location={location}>
-                  {/* Home Component Route */}
                   <Route path="/" exact component={Home} />
-                  {/* Default View Component Route */}
                   <Route path="/default" exact render={() =>
                     <DefaultView loaded={this.state.loaded} movies={this.state.movies} favsList={this.state.favorites} addsFav={this.addToFavorite} deletesFav={this.deleteFromFavorite} />
-                  }/>
+                  } />
                 </Switch>
               </CSSTransition>
             </TransitionGroup>
-          )}/>
+          )} />
           {/* Movie Details Component Route */}
           <Route path="/moviedetails" exact component={MovieDetailsView} />
+          {/* <Route path="/castview" exact component={CastView} /> */}
+          {/* <DefaultView movies={this.state.movies} addsFav={this.addToFavorite} /> */}
         </main>
       );
     }
     else {
-      {/* While API loads */}
+      /* While API loads */
       return (
         <Row justify="center" align="middle" className="load">
           <Spin size="large" tip="Loading..." />
