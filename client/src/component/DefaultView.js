@@ -4,7 +4,7 @@ import Header from './HeaderApp.js';
 import FilteredMovieList from './FilteredMovieList.js';
 import Favorites from './Favorites.js';
 
-import { Layout } from 'antd';
+import { Layout, Spin, Row } from 'antd';
 
 class DefaultView extends React.Component {
     constructor(props) {
@@ -184,7 +184,7 @@ class DefaultView extends React.Component {
                             <Favorites favs={this.props.favsList} delete={this.deleteFav} />
                             <FilteredMovieList loaded={this.props.loaded} filterRating={this.filterRating} filterYear={this.filterYear} filterTitle={this.filterTitle} favsList={this.props.favsList} movies={this.state.filteredMovies} addFav={this.addFav} filterMovie={this.filterMovie} clearFilter={this.clearFilter} />
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
+                        <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2020 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
                     </Layout>
                 );
             }
@@ -194,9 +194,11 @@ class DefaultView extends React.Component {
                     <Header />
                     <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
                         <Favorites favs={this.props.favs} />
-                        <span><i className="fas fa-spinner fa-spin"></i></span>
+                        <Row justify="center" align="middle" className="load">
+                            <Spin size="large" tip="Loading..." />
+                        </Row>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
+                    <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2020 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
                 </Layout>
             );
 

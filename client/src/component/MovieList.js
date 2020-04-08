@@ -2,7 +2,7 @@ import React from 'react';
 import MovieThumb from './MovieThumb.js';
 import MovieFilter from './MovieFilter.js';
 import '../css/MovieList.css';
-import { Typography } from 'antd';
+import { Typography, Spin, Row } from 'antd';
 
 class MovieList extends React.Component {
     render() {
@@ -27,7 +27,10 @@ class MovieList extends React.Component {
             );
         }
         else {
-            return (<span><i className="fas fa-spinner fa-spin"></i></span>);
+            return (
+            <Row justify="center" align="middle" className="load">
+                <Spin size="large" tip="Loading..." />
+            </Row>);
         }
     }
 }
