@@ -1,8 +1,16 @@
+/**
+ * This is the About page
+ * This About page is shown as an Ant Design Modal
+ * This About page contains links to the Node.js API's
+ */
+
+ /*Imports*/
 import React from 'react';
 import { Typography, Space, Button } from 'antd';
 
 class About extends React.Component {
     render() {
+        /* Ant Design variable */
         const { Title } = Typography;
         return (
             <div>
@@ -25,6 +33,7 @@ class About extends React.Component {
                             VS Code, Brackets, GitHub, Git, MongoDB, Node.js, Express, React, Ant Design, Heroku, Netlify
                         </div>
                     </div>
+                    {/* API's */}
                     <div>
                         <Title level={4}>API's</Title>
                         <Space direction="vertical" id="apiBtn">

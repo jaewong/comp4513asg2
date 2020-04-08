@@ -1,3 +1,11 @@
+/**
+ * This is the Cast Tab Component
+ * Child componenet of DetailTab
+ * This component sorts the cast data by order number
+ * It then loops through the sorted array and sends each array object to CastItem
+ */
+
+ /** Imports **/
 import React from 'react';
 import CastItem from './CastItem.js'
 

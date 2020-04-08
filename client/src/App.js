@@ -1,19 +1,28 @@
+/**
+ * This is the App component.
+ * This component includes:
+ *    Route/Switch declarations
+ *    Ant Design: Grid and Loading Symbol
+ *    Transition/Animations
+ *    Add to Favorites function
+ *    Delete from favorites 
+ *    Fetching of Movie API from Node
+ *    Authentication of Login (JWT)
+ */
+
+ /** Imports **/
 import React from 'react';
-import { Link } from 'react-router-dom';
 import DefaultView from './component/DefaultView.js';
 import './App.css';
 import Home from "./component/Home.js";
 import MovieDetailsView from "./component/MovieDetailsView.js";
 import { Route, Switch } from 'react-router-dom';
 import { Spin, Row } from 'antd';
-// import CastView from "./component/CastView.js";
 import {
   CSSTransition,
   TransitionGroup,
 } from 'react-transition-group'; // Used this Tutorial https://www.youtube.com/watch?v=NUQkajBdnmQ , https://github.com/Ihatetomatoes/react-router-page-transition-css
-import Modal from 'react-modal';
 
-Modal.setAppElement('#root');
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -24,6 +33,7 @@ class App extends React.Component {
     this.state.loggedin = false;
   }
 
+  /** Fetching of API**/
   async componentDidMount() {
     try {
       this.authCheck();
@@ -45,11 +55,13 @@ class App extends React.Component {
     }
   }
 
+  /** Check Login **/
   loggedin = () => {
     //Login conition
     return false; 
   }
 
+  /** Authentication **/
   authCheck = () => {
     console.log("goign to heroku");
     // if(!this.loggedin()){
@@ -57,6 +69,7 @@ class App extends React.Component {
     // }
   }
 
+  /** Add to Favorites function **/
   addToFavorite = (poster) => {
     let value = false;
     console.log(poster);
@@ -73,6 +86,7 @@ class App extends React.Component {
     }
   }
 
+  /** Delete from Favorites function **/
   deleteFromFavorite = (poster) => {
     console.log("To be delated: " + poster);
     const fav = this.state.favorites;
@@ -84,12 +98,14 @@ class App extends React.Component {
     this.setState({ favorites: fav });
   }
 
+  /** Includes transition/animation on Home and Default View pages **/
   render() {
     if (this.state.loaded) {
       return (
         <main>
           {/* Used this Tutorial https://www.youtube.com/watch?v=NUQkajBdnmQ , https://github.com/Ihatetomatoes/react-router-page-transition-css */}
           <Route  render={({ location }) => (
+            // Animations/Transition
             <TransitionGroup>
               <CSSTransition
                 key={location.key}
@@ -97,7 +113,9 @@ class App extends React.Component {
                 classNames="fade"
               >
                 <Switch location={location}>
+                  {/* Home Component Route */}
                   <Route path="/" exact component={Home}/>
+                  {/* Default View Component Route */}
                   <Route path="/default" exact render={() =>
                     <DefaultView loaded={this.state.loaded} movies={this.state.movies} favsList={this.state.favorites} addsFav={this.addToFavorite} deletesFav={this.deleteFromFavorite} />
                   }/>
@@ -105,13 +123,13 @@ class App extends React.Component {
               </CSSTransition>
             </TransitionGroup>
           )} onEnter={this.authCheck} />
+          {/* Movie Details Component Route */}
           <Route path="/moviedetails" exact component={MovieDetailsView}/>
-          {/* <Route path="/castview" exact component={CastView} /> */}
-          {/* <DefaultView movies={this.state.movies} addsFav={this.addToFavorite} /> */}
         </main>
       );
     }
     else {
+      {/* While API loads */}
       return (
         <Row justify="center" align="middle" className="load">
           <Spin size="large" tip="Loading..." />

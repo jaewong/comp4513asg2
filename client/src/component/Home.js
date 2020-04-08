@@ -1,6 +1,16 @@
-import { Link } from 'react-router-dom';
+/**
+ * This is the Home component 
+ * Child component of App 
+ * This Includes:
+ *      Search Bar function
+ *      Displays Home page
+ *      Ant Design Components
+ */
+
+ /** Imports **/
 import imgUrl from '../img/cinema.jpg'; /** https://unsplash.com/photos/atsUqIm3wxo **/
 import '../css/Home.css';
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Space, Input, Button, Row, Col, Typography } from 'antd';
 
@@ -10,6 +20,7 @@ class Home extends React.Component {
         this.state = { title: '' };
     }
 
+    /* Search Bar Function */
     searchClick = (e) => {
         e.preventDefault();
         this.setState({ title: e.target.value })
@@ -33,6 +44,7 @@ class Home extends React.Component {
                 <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}>
                     <div className='home-browse'>
                         <Title>Movie Browser</Title>
+                        {/* Search bar */}
                         <Search
                             name="title"
                             ref={this.title}
@@ -43,12 +55,14 @@ class Home extends React.Component {
                         <br />
                         <br/>
                         <Space id="homeBtn">
+                            {/* Using Search Bar */}
                             <Link to={{
                                 pathname: '/default',
                                 state: { homeSearch: this.state.title }
                             }}>
                                 <Button type="primary" size="medium">Search Movies</Button>
                             </Link>
+                            {/* Goes Default View which displays all movies */}
                             <Link to='/default'>
                                 <Button type="primary" size="medium">All Movies</Button>
                             </Link>

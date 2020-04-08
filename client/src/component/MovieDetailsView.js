@@ -1,3 +1,14 @@
+/**
+ * This is the Movie Details View component
+ * This includes:
+ *      Fetching Movie API
+ *      Add and Delete favorites functions
+ *      Cast view Toggle functions
+ *      Output movie details
+ *      Ant Design Components
+ */
+
+ /** Imports **/
 import React from 'react';
 import MovieDetails from './MovieDetails';
 import HeaderApp from './HeaderApp.js';
@@ -23,6 +34,7 @@ class MovieDetailsView extends React.Component {
         this.state.castMember = "";
     }
 
+    /* Fetch */
     async componentDidMount() {
         try {
             const url = `https://comp4513asg2.herokuapp.com/api/movies/${this.props.location.state.id}`;
@@ -43,6 +55,7 @@ class MovieDetailsView extends React.Component {
         }
     }
 
+    /* Add to favorites function */
     addToFav = (link) => {
         let value = false;
         console.log(link);
@@ -51,7 +64,6 @@ class MovieDetailsView extends React.Component {
                 value = true;
             }
         }
-
         if (value === false) {
             const data = this.state.favs;
             data.push(link);
@@ -59,6 +71,7 @@ class MovieDetailsView extends React.Component {
         }
     }
 
+    /* Delete from favorites function */
     deleteFav = (link) => {
         const fav = this.state.favs;
         for (let c = 0; c < fav.length; c++) {
@@ -70,13 +83,13 @@ class MovieDetailsView extends React.Component {
         this.setState({ favs: fav });
     }
 
+    /* Cast Toggle functions */
     castViewOn = (cast) => {
         this.setState({ showCast: false });
         console.log("in details view castview on");
         console.log(cast);
         this.setState({ castMember: cast, showCast: true });
     }
-
     castViewOff = () => {
         if (this.state.showCast) {
             this.setState({ showCast: false });
@@ -87,13 +100,15 @@ class MovieDetailsView extends React.Component {
         let component = "";
         console.log(this.state.movies)
 
+        /* Ant Design Variables */
         const { Content, Footer } = Layout;
 
-        if (!this.state.showCast) {
+        if (!this.state.showCast) { /* Display Movie Details */
             component = <MovieDetails movieData={this.state.movieData} addFav={this.addToFav} />;
-        } else { component = <CastView id={this.state.castMember} close={this.castViewOff} />; }
+        } else { component = <CastView id={this.state.castMember} close={this.castViewOff} />; } /* Displays Cast Views  */
 
 
+        /* Display Cast or Details View and Cast/Crew Tabs */
         if (this.state.loaded) {
             return (
                 <Layout className="layout">
@@ -114,7 +129,7 @@ class MovieDetailsView extends React.Component {
                 </Layout>
             );
         }
-        else {
+        else { /* Loading API */
             return (
                 <Layout className="layout">
                     <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>

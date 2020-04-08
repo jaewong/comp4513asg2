@@ -1,3 +1,13 @@
+/**
+ * This is the Movie Details component
+ * Child Component of Movie Details View
+ * This includes:
+ *      Add to Favorites function
+ *      Displays Movie details
+ *      Ant Design Component
+ */
+
+ /** Imports **/
 import React from "react";
 import Ratings from './Ratings.js';
 import { Row, Col, Button, Typography, Modal, Card, Space, Descriptions, Tag, Divider } from 'antd';
@@ -10,12 +20,12 @@ class MovieDetails extends React.Component {
 
     state = { visible: false };
 
+    /* Ant Design Modal Functions */
     showModal = () => {
         this.setState({
             visible: true,
         });
     };
-
     hideModal = () => {
         this.setState({
             visible: false,
@@ -23,30 +33,35 @@ class MovieDetails extends React.Component {
     };
 
     render() {
+        /* Ant Design Variables */
         const { Title } = Typography;
         const { Meta } = Card;
 
         console.log(this.props.movieData.id);
         const imgUrl = `https://image.tmdb.org/t/p/w185/${this.props.movieData.poster}`;
         let companies, countries, keywords, genres = "";
+        /* Company Details */
         if (this.props.movieData.production.companies) {
             companies = this.props.movieData.production.companies.map((company, key) => {
                 return <Tag color="magenta" key={key} id="company">{company.name}</Tag>;
             })
         } else { companies = <div>No company information available!</div>; }
 
+        /* Country Details */
         if (this.props.movieData.production.countries) {
             countries = this.props.movieData.production.countries.map((country, key) => {
                 return <Tag color="magenta" key={key} id="country">{country.name}</Tag>;
             })
         } else { countries = <div>No country information available!</div>; }
 
+        /* Keywords Details */
         if (this.props.movieData.details.keywords) {
             keywords = this.props.movieData.details.keywords.map((keyword, key) => {
                 return < Tag color="magenta" key={key} id="keyword">#{keyword.name}</Tag>;
             })
         } else { keywords = <div>No keywords available!</div> }
 
+        /* Genres Details */
         if (this.props.movieData.details.genres) {
             genres = this.props.movieData.details.genres.map((genre, key) => {
                 return <Tag color="magenta" key={key} id="genre">{genre.name}</Tag>;
@@ -55,6 +70,7 @@ class MovieDetails extends React.Component {
 
         return (
             <Row id="details">
+                {/* Poster Modal */}
                 <Modal
                     title="Poster"
                     visible={this.state.visible}
@@ -66,7 +82,9 @@ class MovieDetails extends React.Component {
                 </Modal>
 
                 <Col flex="2" className="detailsCol" id="poster">
+                    {/* Title */}
                     <Title>{this.props.movieData.title}</Title>
+                    {/* Poster */}
                     <Card
                         id="poster"
                         hoverable
@@ -79,7 +97,9 @@ class MovieDetails extends React.Component {
                     </Card>
                 </Col>
                 <Col flex="3" id="detailsD">
+                    {/* Add to Favorites */}
                     <Button onClick={this.addFav} type="primary">Add To Favorites</Button>
+                    {/* Details */}
                     <Space id="details-details" direction="vertical">
                         <div>
                             It was released in {this.props.movieData.release_date} and had a revenue of ${this.props.movieData.revenue}.
@@ -100,7 +120,7 @@ class MovieDetails extends React.Component {
                             <Descriptions.Item label="Rating Count">{this.props.movieData.ratings.count}</Descriptions.Item>
                         </Descriptions>
                     </Space>
-
+                    {/* Tags */}
                     <Space id="tags" direction="vertical">
                         <Title level={4}>Companies</Title>
                         <div id="details-companies">
@@ -126,7 +146,8 @@ class MovieDetails extends React.Component {
             </Row >
         );
     }
-
+    
+    /* Add to Favorites Function */
     addFav = () => {
         this.props.addFav(this.props.movieData); // change BACK
     }

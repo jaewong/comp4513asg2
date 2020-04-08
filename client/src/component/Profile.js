@@ -1,3 +1,14 @@
+/**
+ * This component is the user profile page
+ * This page includes:
+ *      User Name (First and Last)
+ *      User Location
+ *      User Date Joined 
+ *      User Profile Picture
+ *      Ant Design
+ */
+
+ /** Imports **/
 import React from 'react';
 import { Avatar, Typography, Space, Spin, Row } from 'antd';
 
@@ -15,8 +26,6 @@ class Profile extends React.Component {
         try {
 
             const url = "https://comp4513asg2.herokuapp.com/api/users/1";
-
-            //const url = "/api/brief";
             const options = {
                 "Content-Type": "application/json",
                 "mode": "cors"
@@ -25,7 +34,6 @@ class Profile extends React.Component {
             const response = await fetch(url, options);
             const jsonData = await response.json({});
             console.log(jsonData);
-            // localStorage.setItem("movies", JSON.stringify(jsonData));
             this.setState({ userData: jsonData });
 
         } catch (error) {
@@ -34,7 +42,7 @@ class Profile extends React.Component {
     }
 
     render() {
-
+        /* Ant Design Variables */
         const { Text } = Typography;
 
         if (this.state.userData.length > 0) {
@@ -42,21 +50,25 @@ class Profile extends React.Component {
             { console.log(this.state.userData.email) }
             return (
                 <Space direction="vertical">
+                    {/* User Image */}
                     <div id="profileImg">
                         <Avatar size={100} src={this.state.userData[0].picture.thumbnail} alt="profile picture" />
                     </div>
+                    {/* Users Full Name */}
                     <div>
                         <Space>
                             <Text level={4} strong>Full Name:</Text>
                             <Text type="secondary">{this.state.userData[0].details.firstname} {this.state.userData[0].details.lastname}</Text>
                         </Space>
                     </div>
+                    {/* Users Location */}
                     <div>
                         <Space>
                             <Text level={4} strong>Location:</Text>
                             <Text type="secondary">{this.state.userData[0].details.city}, {this.state.userData[0].details.country}</Text>
                         </Space>
                     </div>
+                    {/* Users Date Joined */}
                     <div>
                         <Space>
                             <Text level={4} strong>Date Joined:</Text>
@@ -67,14 +79,14 @@ class Profile extends React.Component {
             )
         }
         else {
-            return (
+            return ( 
                 <Row justify="center" align="middle" className="load">
+                    {/* Load Symbol */}
                     <Spin size="large" tip="Loading..." />
                 </Row>
             )
         }
     }
-
 }
 
 export default Profile;

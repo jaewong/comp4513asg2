@@ -1,3 +1,9 @@
+/*Movie List CSS*/
+#movieTitle{
+    text-align: center;
+}
+
+/*CSS for Filtered List*/
 .FiltersWithMovie{
     display: grid;
     grid-template-columns: 7fr;
@@ -6,16 +12,12 @@
     background-color: #fff0f1;
 }
 
+/*CSS for Non-Filtered List*/
 .MovieList{
     margin: 1em 4em 2em 4em;
     padding-top: 1em;
     background-color: white;
 }
-
-#movieTitle{
-    text-align: center;
-}
-
 .listBox{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -26,6 +28,7 @@
     padding-left: 5em;
 }
 
+/*Media Query*/
 @media only screen and (max-width: 1250px){
     .listBox
     {

@@ -1,28 +1,27 @@
+/* This includes some overall website css
+  Some of the CSS include:
+    Ant Design Layout css
+    Logo css
+    Load symbol CSS
+    Profile CSS
+    React Animation/Transition css
+    About API Button css
+*/
+/* App CSS (Overall Website CSS) */
 .App {
   text-align: center;
 }
 
+/* Ant Design Layout CSS */
 .ant-layout-header, .ant-layout-content, .site-layout {
   padding: 0 !important;
 }
 
+/* Logo CSS */
 .App-logo {
   height: 3rem;
   pointer-events: pointer;
   display: inline;
-}
-
-#apiBtn{
-  margin: auto;
-}
-
-#profileImg{
-  margin: auto;
-  text-align: center;
-}
-
-.load{
-  height: 100vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -38,6 +37,22 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* About Page API Button CSS */
+#apiBtn{
+  margin: auto;
+}
+
+/* Profile Image CSS */
+#profileImg{
+  margin: auto;
+  text-align: center;
+}
+
+/* Loading CSS */
+.load{
+  height: 100vh;
 }
 
 /* Used this Tutorial https://www.youtube.com/watch?v=NUQkajBdnmQ , https://github.com/Ihatetomatoes/react-router-page-transition-css */

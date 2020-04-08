@@ -1,3 +1,4 @@
+/*Favorites List CSS*/
 #favList{
     display: flex;
     flex-flow: row wrap;
@@ -5,6 +6,7 @@
     align-content: center;
 }
 
+/*When Favorites is empty css*/
 #empty{
     margin: auto;
     text-align: center;

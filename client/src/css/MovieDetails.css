@@ -1,9 +1,9 @@
+/*Movie Details CSS*/
 #movie-details{
     margin: 1em 4em 2em 4em;
     background-color: white;
     padding: 1em;
 }
-
 .site-layout{
     background-color: #fff0f1;
 }
@@ -16,51 +16,41 @@
     padding: 1em;
 }
 
+/*Image CSS*/
 #modalPoster{
     text-align: center;
     margin: auto;
     width: 100%;
 }
-
 #poster{
     text-align: center;
 }
 
+/*Movie Detail CSS*/
 #details-details{
     padding: 0 1em;
     padding-top: 4em;
 }
-
 #detailsD button{
     float: right;
 }
-
 #tags{
     padding: 1em;
 }
-
 #company, #country, #keyword, #genre{
     margin-top: 0.6em;
 }
-
 h4{
     margin-bottom: 0 !important;
 }
-
 #close{
     margin: 1em 1em 0em 0em;
 }
 
+/*Cast/Crew Tab CSS*/
 #tabs{
     margin: 0em 1em;
 }
-
-.fa-spinner{
-    width: 20px;
-    height: 20px;
-    /* margin: auto; */
-}
-
 .tab-list{
     list-style: none;
     display: block;
@@ -69,34 +59,13 @@ h4{
     padding-top: 1em;
 }
 
-/* simple - enter transition 300ms, exit 150ms */
-.fade-appear,
-.fade-enter {
-    opacity: 0;
-    z-index: 1;
-}
-.fade-appear-active,
-.fade-enter.fade-enter-active {
-    opacity: 1;
-    transition: opacity 3000ms linear 1500ms;
-}
-
-.fade-exit {
-    opacity: 1;
-}
-
-.fade-exit.fade-exit-active {
-    opacity: 0;
-    transition: opacity 1500ms linear;
-}
-
+/*Media Query*/
 @media only screen and (max-width: 1200px){
     #movie-details{
         display: block;
         margin: 1em;
     }
 }
-
 @media only screen and (max-width: 800px){
     #movie-details-column-1 h1{
         margin: 0;

@@ -1,9 +1,23 @@
+/**
+ * This is the default View component 
+ * Child component of App
+ * This Includes:
+ *      Add and Delete Favorites fuction
+ *      Filter Movie function
+ *      Clear Filter function
+ *      Filter Title function
+ *      Filter Year function
+ *      Filter Rating function
+ *      Header, Favorites, and Movie List (Both Filtered and Unfiltered)
+ *      Ant Design Components 
+ */
+
+ /** Imports **/
 import React from 'react';
 import MovieList from './MovieList.js';
 import Header from './HeaderApp.js';
 import FilteredMovieList from './FilteredMovieList.js';
 import Favorites from './Favorites.js';
-
 import { Layout, Spin, Row } from 'antd';
 
 class DefaultView extends React.Component {
@@ -23,17 +37,18 @@ class DefaultView extends React.Component {
         this.state.homeSearch = '';
     }
 
+    /** Add Favorites function **/
     addFav = (poster) => { // takes a whole movie object
         this.props.addsFav(poster);
     }
 
+    /** Delete Favorites function **/
     deleteFav = (movie) => {
         this.props.deletesFav(movie);
     }
 
-
+    /** FilterMovie List function **/
     filterMovie = (values) => {
-
         let title = values.title;
         let minYear = values.yearBefore;
         let maxYear = values.yearAfter;
@@ -42,18 +57,13 @@ class DefaultView extends React.Component {
 
         if (title) {
             console.log("******   " + title);
-
-
             this.setState({ title: title }, function () { console.log(this.state.title) });
-
             const url = `https://comp4513asg2.herokuapp.com/api/find/title/${title}`;
             console.log("IN mount");
-
             const options = {
                 "Content-Type": "application/json",
                 "mode": "cors"
             }
-
             fetch(url, options)
                 .then(function (response) {
                     return response.json();
@@ -89,11 +99,9 @@ class DefaultView extends React.Component {
                     } else {
                         data = [];
                     }
-
                     this.setState({ filteredMovies: data, showFiltered: true });
                 })
         } else if (minRating && maxRating) {
-
             const url = `https://comp4513asg2.herokuapp.com/api/find/rating/${minRating}/${maxRating}`;
             const options = {
                 "Content-Type": "application/json",
@@ -123,11 +131,12 @@ class DefaultView extends React.Component {
         }
     }
 
-
+    /** Clear Filter function **/
     clearFilter = () => {
         this.setState({ filteredMovies: {}, showFiltered: false });
     }
 
+    /** Title Filter function **/
     filterTitle = (movieArray) => {
         movieArray.sort((a, b) => {
             var x = a.title.toLowerCase();
@@ -139,6 +148,7 @@ class DefaultView extends React.Component {
         this.setState({ filteredMovies: movieArray });
     }
 
+    /** Year Filter function **/
     filterYear = (movieArray) => {
         movieArray.sort((a, b) => {
             var x = a.release_date.substring(0, 4);
@@ -150,6 +160,7 @@ class DefaultView extends React.Component {
         this.setState({ filteredMovies: movieArray });
     }
 
+    /** Rating Filter function **/
     filterRating = (movieArray) => {
         movieArray.sort((a, b) => {
             var x = a.ratings.average;
@@ -162,9 +173,10 @@ class DefaultView extends React.Component {
     }
 
     render() {
+        /* Ant Design Variables */
         const { Content, Footer } = Layout;
         if (this.props.loaded) {
-            if (!this.state.showFiltered) {
+            if (!this.state.showFiltered) { //Unfiltered Movie List
                 return (
                     <Layout className="layout">
                         <Header />
@@ -177,7 +189,7 @@ class DefaultView extends React.Component {
                 );
             }
             else {
-                return (
+                return ( //Filtered Movie List
                     <Layout className="layout">
                         <Header />
                         <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
@@ -189,7 +201,7 @@ class DefaultView extends React.Component {
                 );
             }
         } else {
-            return (
+            return ( //Loading Movie List (API)
                 <Layout className="layout">
                     <Header />
                     <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
@@ -204,8 +216,6 @@ class DefaultView extends React.Component {
 
         }
     }
-
-
 }
 
 export default DefaultView;
