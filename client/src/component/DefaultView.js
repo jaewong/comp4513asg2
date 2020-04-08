@@ -10,7 +10,6 @@ class DefaultView extends React.Component {
     constructor(props) {
         super(props);
         this.state = { movies: this.filterTitle(this.props.movies), loaded: false };
-        //        this.state = { title: "", yearBefore: "", ratingBefore: "" };
 
         this.state.title = '';
         this.state.minYear = '';
@@ -34,19 +33,22 @@ class DefaultView extends React.Component {
 
 
     filterMovie = (title, minYear, maxYear, minRating, maxRating) => {
-
+        console.log("hi");
         if (title) {
             console.log("******   " + title);
 
 
             this.setState({ title: title }, function () { console.log(this.state.title) });
 
-            const url = `/api/find/title/${title}`;
-            //                const url = `/api/movies/2`;
-            //        const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
+            const url = `https://comp4513asg2.herokuapp.com/api/find/title/${title}`;
             console.log("IN mount");
 
-            fetch(url)
+            const options = {
+                "Content-Type": "application/json",
+                "mode": "cors"
+            }
+
+            fetch(url, options)
                 .then(function (response) {
                     return response.json();
                 })
@@ -54,7 +56,7 @@ class DefaultView extends React.Component {
                     let sortedMovies = data.sort((a, b) => {
                         return a.title < b.title ? -1 : 1;
                     })
-
+                    console.log(sortedMovies);
                     this.setState({ filteredMovies: sortedMovies, showFiltered: true });
                 })
         };
@@ -63,9 +65,13 @@ class DefaultView extends React.Component {
             console.log(minYear);
 
             this.setState({ minYear: minYear, maxYear: maxYear });
-            const url = `api/find/year/${minYear}/${maxYear}`;
+            const url = `https://comp4513asg2.herokuapp.com/api/find/year/${minYear}/${maxYear}`;
+            const options = {
+                "Content-Type": "application/json",
+                "mode": "cors"
+            }
 
-            fetch(url)
+            fetch(url, options)
                 .then(function (response) {
                     return response.json();
                 })
@@ -89,9 +95,13 @@ class DefaultView extends React.Component {
             console.log(minYear);
 
             this.setState({ minRating: minRating, maxRating: maxRating });
-            const url = `api/find/rating/${minRating}/${maxRating}`;
+            const url = `https://comp4513asg2.herokuapp.com/api/find/rating/${minRating}/${maxRating}`;
+            const options = {
+                "Content-Type": "application/json",
+                "mode": "cors"
+            }
 
-            fetch(url)
+            fetch(url, options)
                 .then(function (response) {
                     return response.json();
                 })
