@@ -4,7 +4,7 @@ import FavoriteItem from './FavoriteItem.js';
 // import { findByLabelText } from '@testing-library/react';
 import '../css/favorites.css';
 
-import { Collapse } from 'antd';
+import { Collapse , Empty } from 'antd';
 
 class Favorites extends React.Component {
 
@@ -20,12 +20,15 @@ class Favorites extends React.Component {
 
     render() {
         let content = <div></div>;
-        let icon = <i className="fas fa-plus"></i>;
 
-        if (this.state.showContent) {
-            content = this.props.favs.map((p, index) => <FavoriteItem key={index} poster={p} favsList={this.props.favs} deleteFav={this.props.delete}></FavoriteItem>);
-            icon = <i className="fas fa-chevron-up"></i>;
+        if(this.props.favs.length > 0){
+            if (this.state.showContent) {
+                content = this.props.favs.map((p, index) => <FavoriteItem key={index} poster={p} favsList={this.props.favs} deleteFav={this.props.delete}></FavoriteItem>);
+            }
+        }else{
+            content = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} id="empty"/>;
         }
+        
 
         const { Panel } = Collapse;
 

@@ -8,6 +8,7 @@ var cors = require('cors');
 const passport = require('passport');
 const flash = require('express-flash');
 const mongoose = require('mongoose');
+// const cors = require('cors');
 
 // use .env file for configuration constants
 require('dotenv').config();
@@ -32,6 +33,7 @@ app.use(cors());
 // setup express middleware
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
+
 
 // Express session
 app.use(cookieParser('oreos'));
@@ -68,14 +70,15 @@ app.use(function (err, req, res, next) {
     res.json({ error: err });
 });
 
-app.use(parser.json());
+
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
+    app.use(express.static(path.join(__dirname, 'client/build')));
 
     const path = require('path');
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+        // res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+        res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
     })
 
 }

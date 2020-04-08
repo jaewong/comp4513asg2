@@ -5,8 +5,8 @@ import DetailTabs from './DetailTabs.js';
 import Favorites from './Favorites.js';
 import CastView from './CastView.js';
 import "../css/MovieDetails.css";
-
-import { Layout } from 'antd';
+import { Link } from 'react-router-dom';
+import { Row, Col, Layout, Button } from 'antd';
 
 class MovieDetailsView extends React.Component {
 
@@ -25,12 +25,18 @@ class MovieDetailsView extends React.Component {
 
     async componentDidMount() {
         try {
-            const url = `https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies.php?id=${this.props.location.state.id}`;
+            const url = `https://comp4513asg2.herokuapp.com/api/movies/${this.props.location.state.id}`;
 
-            const response = await fetch(url);
-            const jsonData = await response.json();
+            //const url = "/api/brief";
+            const options = {
+                "Content-Type": "application/json",
+                "mode": "cors"
+            }
 
-            this.setState({ movieData: jsonData, loaded: true });
+            const response = await fetch(url, options);
+            const jsonData = await response.json({});
+            console.log(jsonData);
+            this.setState({ movieData: jsonData[0], loaded: true }, console.log(this.state.movieData));
 
         } catch (error) {
             console.error(error);
@@ -79,6 +85,10 @@ class MovieDetailsView extends React.Component {
 
     render() {
         let component = "";
+        console.log(this.state.movies)
+
+        const { Content, Footer } = Layout;
+
         if (!this.state.showCast) {
             component = <MovieDetails movieData={this.state.movieData} addFav={this.addToFav} />;
         } else { component = <CastView id={this.state.castMember} close={this.castViewOff} />; }
@@ -87,23 +97,37 @@ class MovieDetailsView extends React.Component {
         if (this.state.loaded) {
             return (
                 <Layout className="layout">
-                        <HeaderApp />
+                    <HeaderApp />
+                    <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
                         <Favorites favs={this.state.favs} delete={this.deleteFav} />
-                        <div id="movie-details">
-                            {console.log(this.state.castMember)}
-                            {console.log("^^^^^^^^^^ castMember in details view")}
-                            {component}
-                            <DetailTabs movieData={this.state.movieData} toggle={this.castViewOn} />
+                        <div id="close" style={{ textAlign: 'right' }}>
+                            <Link to='./default'>
+                                <Button type="primary" danger>Close</Button>
+                            </Link>
                         </div>
+                        <Row id="movie-details">
+                            <Col flex="3">{component}</Col>
+                            <Col flex="2"><DetailTabs movieData={this.state.movieData} toggle={this.castViewOn} /></Col>
+                        </Row>
+                    </Content>
+                    <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
                 </Layout>
             );
         }
         else {
             return (
                 <Layout className="layout">
-                    <HeaderApp />
-                    <Favorites favs={this.state.favs} delete={this.deleteFav} />
-                    <span><i className="fas fa-spinner fa-spin"></i></span>
+                    <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
+                        <HeaderApp />
+                        <Favorites favs={this.state.favs} delete={this.deleteFav} />
+                        <div id="close" style={{ textAlign: 'right' }}>
+                            <Link to='./default'>
+                                <Button type="primary" danger>Close</Button>
+                            </Link>
+                        </div>
+                        <span><i className="fas fa-spinner fa-spin"></i></span>
+                    </Content>
+                    <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
                 </Layout>
             );
         }

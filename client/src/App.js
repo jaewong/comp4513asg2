@@ -3,6 +3,7 @@ import DefaultView from './component/DefaultView.js';
 import './App.css';
 import Home from "./component/Home.js";
 import MovieDetailsView from "./component/MovieDetailsView.js";
+import Profile from "./component/Profile.js";
 import { Route, Switch } from 'react-router-dom';
 // import CastView from "./component/CastView.js";
 import {
@@ -18,21 +19,24 @@ class App extends React.Component {
     this.state = { movies: [] };
     this.state.favorites = [];
     this.state.loaded = false;
+    this.state.loggedin = false;
   }
 
   async componentDidMount() {
     try {
-      
-      
-//      const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
-           
-      const url = "https://comp4513asg2.netlify.com/?fbclid=IwAR3Cb9YgYtF27-9QyYecFFDFrCATeUCi0STiMZMBBrx-y5-DdrYL7AmNZNg/api/brief";
+      this.checkLoggedIn();
+      const url = "https://comp4513asg2.herokuapp.com/api/movies";
 
-      const response = await fetch(url);
-      const jsonData = await response.json();
-      
+      //const url = "/api/brief";
+      const options = {
+        "Content-Type": "application/json",
+        "mode": "cors"
+      }
+
+      const response = await fetch(url, options);
+      const jsonData = await response.json({});
+      console.log(jsonData);
       this.setState({ movies: jsonData, loaded: true });
-       
 
     } catch (error) {
       console.error(error);
@@ -69,6 +73,25 @@ class App extends React.Component {
 
   }
 
+  async checkLoggedIn() {
+    if (!this.state.loggedin) {
+      // window.location.href = "https://comp4513asg2.herokuapp.com";
+      const url = "https://comp4513asg2.herokuapp.com/";
+
+      //const url = "/api/brief";
+      const options = {
+        "Content-Type": "application/json",
+        "mode": "cors"
+      }
+
+      // const response = await fetch(url, options);
+      // const jsonData = await response.json({});
+      //console.log(jsonData);
+      // localStorage.setItem("movies", JSON.stringify(jsonData));
+      this.setState({ loggedin: true });
+    }
+  }
+
   render() {
     if (this.state.loaded) {
       return (
@@ -90,6 +113,7 @@ class App extends React.Component {
               </CSSTransition>
             </TransitionGroup>
           )} />
+          <Route path="/profile" exact component={Profile} />
           <Route path="/moviedetails" exact component={MovieDetailsView} />
           {/* <Route path="/castview" exact component={CastView} /> */}
           {/* <DefaultView movies={this.state.movies} addsFav={this.addToFavorite} /> */}

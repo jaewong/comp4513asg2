@@ -10,20 +10,19 @@ class DefaultView extends React.Component {
     constructor(props) {
         super(props);
         this.state = { movies: this.filterTitle(this.props.movies), loaded: false };
-//        this.state = { title: "", yearBefore: "", ratingBefore: "" };
-        
+        //        this.state = { title: "", yearBefore: "", ratingBefore: "" };
+
         this.state.title = '';
         this.state.minYear = '';
         this.state.maxYear = '';
         this.state.minRating = '';
         this.state.maxRating = '';
-        
-        
+
+
         this.state.filteredMovies = {};
         this.state.showFiltered = false;
         this.state.homeSearch = '';
     }
-
 
     addFav = (poster) => { // takes a whole movie object
         this.props.addsFav(poster);
@@ -34,89 +33,86 @@ class DefaultView extends React.Component {
     }
 
 
-       filterMovie = (title, minYear, maxYear, minRating, maxRating) => {
+    filterMovie = (title, minYear, maxYear, minRating, maxRating) => {
 
-        if(title)
-            {
-                console.log("******   " + title);
-        
-        
-                this.setState({title: title},  function() {console.log(this.state.title)});
-        
-                const url = `/api/find/title/${title}`;
-//                const url = `/api/movies/2`;
-//        const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
-                console.log("IN mount");
-                
+        if (title) {
+            console.log("******   " + title);
+
+
+            this.setState({ title: title }, function () { console.log(this.state.title) });
+
+            const url = `/api/find/title/${title}`;
+            //                const url = `/api/movies/2`;
+            //        const url = "https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL";
+            console.log("IN mount");
+
             fetch(url)
-                .then(function(response){
-                return response.json();
-            })
-            .then( data => {
-                let sortedMovies = data.sort((a,b) => {
-                    return a.title < b.title ? -1 : 1;
+                .then(function (response) {
+                    return response.json();
                 })
-                
-                this.setState({ filteredMovies: sortedMovies, showFiltered: true });
-        })
-            };
-        
-        if(minYear || maxYear)
-            {
-                console.log(minYear);
-        
-                this.setState({minYear: minYear , maxYear: maxYear});
-                const url = `api/find/year/${minYear}/${maxYear}`;
-                
+                .then(data => {
+                    let sortedMovies = data.sort((a, b) => {
+                        return a.title < b.title ? -1 : 1;
+                    })
+
+                    this.setState({ filteredMovies: sortedMovies, showFiltered: true });
+                })
+        };
+
+        if (minYear || maxYear) {
+            console.log(minYear);
+
+            this.setState({ minYear: minYear, maxYear: maxYear });
+            const url = `api/find/year/${minYear}/${maxYear}`;
+
             fetch(url)
-                .then(function(response){
-                return response.json();
+                .then(function (response) {
+                    return response.json();
                 })
-                .then( data => {
-                 
-                data.sort((a,b) => {
-                    var x = a.release_date.substring(0,4);
-                    var y = b.release_date.substring(0,4);
-                    if(x < y) {return -1;}
-                    if( x > y) {return 1;}
-                    return 0;
-                })
+                .then(data => {
+
+                    data.sort((a, b) => {
+                        var x = a.release_date.substring(0, 4);
+                        var y = b.release_date.substring(0, 4);
+                        if (x < y) { return -1; }
+                        if (x > y) { return 1; }
+                        return 0;
+                    })
 
                     console.log(data);
                     this.setState({ filteredMovies: data, showFiltered: true });
                 })
-            }
-        
-        if(minRating || maxRating)
-            {
-                
-                console.log(minYear);
-        
-                this.setState({minRating: minRating , maxRating: maxRating});
-                const url = `api/find/rating/${minRating}/${maxRating}`;
-                
+        }
+
+        if (minRating || maxRating) {
+
+            console.log(minYear);
+
+            this.setState({ minRating: minRating, maxRating: maxRating });
+            const url = `api/find/rating/${minRating}/${maxRating}`;
+
             fetch(url)
-                .then(function(response){
-                return response.json();
+                .then(function (response) {
+                    return response.json();
                 })
-                .then( data => {
-                 
-                data.sort((a,b) => {
-                    var x = a.rating;
-                    var y = b.rating;
-                    if(x < y) {return -1;}
-                    if( x > y) {return 1;}
-                    return 0;
-                })
+                .then(data => {
+
+                    data.sort((a, b) => {
+                        var x = a.rating;
+                        var y = b.rating;
+                        if (x < y) { return -1; }
+                        if (x > y) { return 1; }
+                        return 0;
+                    })
 
                     console.log(data);
                     this.setState({ filteredMovies: data, showFiltered: true });
                 })
-            }
+        }
 
-        
-    }   
-    
+
+    }
+
 
     clearFilter = () => {
         this.setState({ filteredMovies: {}, showFiltered: false });
@@ -156,7 +152,7 @@ class DefaultView extends React.Component {
     }
 
     render() {
-        const { Content } = Layout;
+        const { Content, Footer } = Layout;
         if (this.props.loaded) {
             if (!this.state.showFiltered) {
                 return (
@@ -166,6 +162,7 @@ class DefaultView extends React.Component {
                             <Favorites favs={this.props.favsList} delete={this.deleteFav} />
                             <MovieList loaded={this.props.loaded} filterRating={this.filterRating} filterYear={this.filterYear} filterTitle={this.filterTitle} favsList={this.props.favsList} movies={this.props.movies} addFav={this.addFav} filterMovie={this.filterMovie} clearFilter={this.clearFilter} />
                         </Content>
+                        <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2020 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
                     </Layout>
                 );
             }
@@ -177,6 +174,7 @@ class DefaultView extends React.Component {
                             <Favorites favs={this.props.favsList} delete={this.deleteFav} />
                             <FilteredMovieList loaded={this.props.loaded} filterRating={this.filterRating} filterYear={this.filterYear} filterTitle={this.filterTitle} favsList={this.props.favsList} movies={this.state.filteredMovies} addFav={this.addFav} filterMovie={this.filterMovie} clearFilter={this.clearFilter} />
                         </Content>
+                        <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
                     </Layout>
                 );
             }
@@ -188,6 +186,7 @@ class DefaultView extends React.Component {
                         <Favorites favs={this.props.favs} />
                         <span><i className="fas fa-spinner fa-spin"></i></span>
                     </Content>
+                    <Footer style={{ textAlign: 'center' }}>COMP 4513 Assignment 2 ©2018 Created by Leris Arandia, Jamie Wong, Natnael Beshawered</Footer>
                 </Layout>
             );
 
