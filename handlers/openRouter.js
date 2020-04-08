@@ -6,7 +6,7 @@ const cors = require('cors');
 
 // Welcome Page
 router.get('/', cors(), helper.ensureAuthenticated, (req, resp) => {
-   resp.end();
+   resp.render('home', { message: req.flash('error') });
 });
 
 router.get('/login', (req, resp) => {
