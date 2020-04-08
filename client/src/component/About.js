@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Space } from 'antd';
+import { Typography, Space, Button } from 'antd';
 
 class About extends React.Component {
     render() {
@@ -23,8 +23,13 @@ class About extends React.Component {
                         <Title level={4}>What was used?</Title>
                         <div>
                             VS Code, Brackets, GitHub
+                        </div>
                     </div>
-                    </div>
+                    <div><Button href="https://comp4513asg2.herokuapp.com/api/movies">Get All Movies</Button></div>
+                    <div><Button href="https://comp4513asg2.herokuapp.com/api/movies/257">Get A Movie</Button></div>
+                    <div><Button href="https://comp4513asg2.herokuapp.com/api/brief">Get Brief Movies</Button></div>
+                    <div><Button href="https://comp4513asg2.herokuapp.com/api/find/title/dead">Get All Movies With "dead"</Button></div>
+                    <div><Button href="https://comp4513asg2.herokuapp.com/api/find/year/1990/1997">Get All Movies Between 1990 and 1997</Button></div>
                 </Space>
             </div>
         )
