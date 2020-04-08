@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import DefaultView from './component/DefaultView.js';
 import './App.css';
 import Home from "./component/Home.js";
@@ -18,6 +19,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { movies: [] };
+    this.state.jwt = "";
     this.state.favorites = [];
     this.state.loaded = false;
     this.state.loggedin = false;
@@ -44,6 +46,16 @@ class App extends React.Component {
     }
   }
 
+
+  loggedin = () => {
+
+  }
+
+  authCheck = () => {
+    if(!this.loggedin()){
+      window.location.replace('https://comp4513asg2.herokuapp.com/');
+    }
+  }
 
   addToFavorite = (poster) => {
     let value = false;
@@ -106,7 +118,7 @@ class App extends React.Component {
                 classNames="fade"
               >
                 <Switch location={location}>
-                  <Route path="/" exact component={Home} />
+                  <Route path="/" exact component={Home} onEnter={}/>
                   <Route path="/default" exact render={() =>
                     <DefaultView loaded={this.state.loaded} movies={this.state.movies} favsList={this.state.favorites} addsFav={this.addToFavorite} deletesFav={this.deleteFromFavorite} />
                   } />
@@ -114,7 +126,6 @@ class App extends React.Component {
               </CSSTransition>
             </TransitionGroup>
           )} />
-          <Route path="/profile" exact component={Profile} />
           <Route path="/moviedetails" exact component={MovieDetailsView} />
           {/* <Route path="/castview" exact component={CastView} /> */}
           {/* <DefaultView movies={this.state.movies} addsFav={this.addToFavorite} /> */}
