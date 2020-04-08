@@ -1,36 +1,74 @@
 import React from 'react';
-import Modal from 'react-modal';
-import ModalHandler from './ModalHandler.js';
 import { Link } from 'react-router-dom';
 import logo from '../img/logo.png';
-import { Layout, Menu } from 'antd';
+import About from './About.js';
+import Profile from './Profile.js';
+import { Layout, Menu, Modal, Drawer } from 'antd';
 
 
 class HeaderApp extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { showModal: false };
-    }
+    /**Code From Ant Design Website: https://ant.design/components/modal/ & https://codesandbox.io/s/c6jbr**/
+    state = { 
+        visible: false,
+        vis: false
+    };
 
-    openModal = () => { this.setState({ showModal: true }); }
-    closeModal = () => { this.setState({ showModal: false }); }
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
 
+    hideModal = () => {
+        this.setState({
+            visible: false,
+        });
+    };
+
+    /**Code From Ant Design Website: https://ant.design/components/drawer/**/
+    showDrawer = () => {
+        this.setState({
+            vis: true,
+        });
+    };
+
+    onClose = () => {
+        this.setState({
+            vis: false,
+        });
+    };
 
     render() {
         const { Header } = Layout;
         return (
             <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
                 <Menu theme='light' mode="horizontal">
-                <Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link>
-                    <Menu.Item key="1">Browse</Menu.Item>
-                    <Menu.Item key="2">Profile</Menu.Item>
-                    <Modal isOpen={this.state.showModal} overlayClassName="Overlay">
-                        <ModalHandler page="about" closeModal={this.closeModal}></ModalHandler>
+                    <Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link>
+                    <Menu.Item key="1" onClick={this.showDrawer}>Profile</Menu.Item>
+                    
+                    <Menu.Item key="2" onClick={this.showModal}>About</Menu.Item>
+                    <Modal
+                        title="About Us"
+                        visible={this.state.visible}
+                        onCancel={this.hideModal}
+                        closable
+                        footer={null}
+                    >
+                        <About />
                     </Modal>
-                    <Menu.Item key="3" onClick={this.openModal}>About</Menu.Item>
-                    <Menu.Item key="4">Logout</Menu.Item>
+                    <Menu.Item key="3">Logout</Menu.Item>
                 </Menu>
+                <Drawer
+                        title="User Profile"
+                        placement="right"
+                        onClose={this.onClose}
+                        visible={this.state.vis}
+                        width="medium"
+                        closable
+                    >
+                        <Profile />
+                    </Drawer>
             </Header>
         );
     }

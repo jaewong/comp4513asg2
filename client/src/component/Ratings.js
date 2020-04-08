@@ -38,8 +38,8 @@ class Ratings extends React.Component {
 
     createWholeRating(num) {
         let rate = this.state.rating;
-        const wholeStar = <i className="fas fa-star"></i>;
-        const emptyStar = <i className="far fa-star"></i>;
+        const wholeStar = <i className="fa fa-star" aria-hidden="true"></i>;
+        const emptyStar = <i className="fa fa-star-o" aria-hidden="true"></i>
 
         console.log(num);
         for (let n = 0; n < num; n++) {
@@ -57,9 +57,9 @@ class Ratings extends React.Component {
     createHalfRating(num) {
         let rate = this.state.rating;
 
-        const wholeStar = <i className="fas fa-star"></i>;
-        const halfStar = <i className="fas fa-star-half-alt"></i>;
-        const emptyStar = <i className="far fa-star" />;
+        const wholeStar = <i className="fa fa-star" aria-hidden="true"></i>;
+        const halfStar = <i className="fa fa-star-half-o" aria-hidden="true"></i>
+        const emptyStar = <i className="fa fa-star-o" aria-hidden="true"></i>
 
         for (let n = 0; n < (num - 0.5); n++) {
             rate.push(wholeStar);

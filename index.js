@@ -8,6 +8,7 @@ var cors = require('cors');
 const passport = require('passport');
 const flash = require('express-flash');
 const mongoose = require('mongoose');
+// const cors = require('cors');
 
 // use .env file for configuration constants
 require('dotenv').config();

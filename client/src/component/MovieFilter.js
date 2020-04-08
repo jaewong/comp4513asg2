@@ -168,7 +168,6 @@ class MovieFilter extends React.Component {
                             <Button type="primary" onClick={this.props.clearFilter}>Clear</Button>
                         </Space>
                     </Form>
-
                 </Drawer>
             </div>
         );
