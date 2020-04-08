@@ -26,6 +26,8 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
+    this.authCheck();
+
     try {
       this.checkLoggedIn();
       const url = "https://comp4513asg2.herokuapp.com/api/movies";
@@ -46,15 +48,15 @@ class App extends React.Component {
     }
   }
 
-
   loggedin = () => {
-
+    return false; 
   }
 
   authCheck = () => {
-    if(!this.loggedin()){
-      window.location.replace('https://comp4513asg2.herokuapp.com/');
-    }
+    console.log("goign to heroku");
+    // if(!this.loggedin()){
+    //   window.location.replace('https://comp4513asg2.herokuapp.com/');
+    // }
   }
 
   addToFavorite = (poster) => {
@@ -118,7 +120,7 @@ class App extends React.Component {
                 classNames="fade"
               >
                 <Switch location={location}>
-                  <Route path="/" exact component={Home} onEnter={}/>
+                  <Route path="/" exact component={Home} onEnter={this.authCheck}/>
                   <Route path="/default" exact render={() =>
                     <DefaultView loaded={this.state.loaded} movies={this.state.movies} favsList={this.state.favorites} addsFav={this.addToFavorite} deletesFav={this.deleteFromFavorite} />
                   } />

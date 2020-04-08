@@ -6,11 +6,6 @@ const cors = require('cors');
 
 // Welcome Page
 router.get('/', cors(), helper.ensureAuthenticated, (req, resp) => {
-   // resp.writeHead(301,
-   //    { Location: 'https://comp4513asg2.netlify.com' }
-   // );
-   // console.log(req);
-   // resp.body(req.user)
    resp.end();
 });
 
