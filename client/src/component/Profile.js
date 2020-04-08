@@ -1,4 +1,6 @@
 import React from 'react';
+import { Avatar, Typography, Space, Spin, Row } from 'antd';
+
 
 class Profile extends React.Component {
     constructor(props) {
@@ -32,21 +34,43 @@ class Profile extends React.Component {
     }
 
     render() {
+
+        const { Text } = Typography;
+
         if (this.state.userData.length > 0) {
             { console.log(this.state.userData[0]); }
             { console.log(this.state.userData.email) }
             return (
-                <div>
-                    <div>{this.state.userData[0].details.firstname} {this.state.userData[0].details.lastname}</div>
-                    <div>{this.state.userData[0].details.city}, {this.state.userData[0].details.country}</div>
-                    <img src={this.state.userData[0].picture.thumbnail} />
-                    <div>{this.state.userData[0].membership.date_joined}</div>
-                </div>
+                <Space direction="vertical">
+                    <div id="profileImg">
+                        <Avatar size={100} src={this.state.userData[0].picture.thumbnail} alt="profile picture" />
+                    </div>
+                    <div>
+                        <Space>
+                            <Text level={4} strong>Full Name:</Text>
+                            <Text type="secondary">{this.state.userData[0].details.firstname} {this.state.userData[0].details.lastname}</Text>
+                        </Space>
+                    </div>
+                    <div>
+                        <Space>
+                            <Text level={4} strong>Location:</Text>
+                            <Text type="secondary">{this.state.userData[0].details.city}, {this.state.userData[0].details.country}</Text>
+                        </Space>
+                    </div>
+                    <div>
+                        <Space>
+                            <Text level={4} strong>Date Joined:</Text>
+                            <Text type="secondary">{this.state.userData[0].membership.date_joined}</Text>
+                        </Space>
+                    </div>
+                </Space>
             )
         }
         else {
             return (
-                <div>hi</div>
+                <Row justify="center" align="middle" className="load">
+                    <Spin size="large" tip="Loading..." />
+                </Row>
             )
         }
     }
