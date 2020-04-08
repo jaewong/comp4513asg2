@@ -65,7 +65,7 @@ class App extends React.Component {
         value = true;
       }
     }
-
+    
     if (value === false) {
       const data = this.state.favorites;
       data.push(poster);

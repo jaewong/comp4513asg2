@@ -1,3 +1,4 @@
+// ----- connects to MongoDB with specific configuration -----
 require('dotenv').config();
 
 const mongoose = require('mongoose');

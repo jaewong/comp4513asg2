@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// define a schema that maps to the structure of the data in MongoDB
+// define a schema that maps to the structure of the Brief Movie data
 const briefSchema = new mongoose.Schema({
     id: Number,
     tmdb_id: Number,
