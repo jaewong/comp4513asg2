@@ -5,25 +5,25 @@ import { Drawer, Button, Form, Space, Radio, Input, Row, Col, Typography } from 
 class MovieFilter extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = { yearRadio: {}, ratingRadio: {} };
+        this.state = { yearRadio: {}, ratingRadio: {} };
 
-        // this.title = React.createRef();
+        this.title = React.createRef();
 
-        // this.yearBeforeRadio = React.createRef();
-        // this.yearBefore = React.createRef();
-        // this.yearAfterRadio = React.createRef();
-        // this.yearAfter = React.createRef();
-        // this.yearBetweenRadio = React.createRef();
-        // this.yearMin = React.createRef();
-        // this.yearMax = React.createRef();
+        this.yearBeforeRadio = React.createRef();
+        this.yearBefore = React.createRef();
+        this.yearAfterRadio = React.createRef();
+        this.yearAfter = React.createRef();
+        this.yearBetweenRadio = React.createRef();
+        this.yearMin = React.createRef();
+        this.yearMax = React.createRef();
 
-        // this.ratingBelowRadio = React.createRef();
-        // this.ratingBelow = React.createRef();
-        // this.ratingAboveRadio = React.createRef();
-        // this.ratingAbove = React.createRef();
-        // this.ratingBetweenRadio = React.createRef();
-        // this.ratingMin = React.createRef();
-        // this.ratingMax = React.createRef();
+        this.ratingBelowRadio = React.createRef();
+        this.ratingBelow = React.createRef();
+        this.ratingAboveRadio = React.createRef();
+        this.ratingAbove = React.createRef();
+        this.ratingBetweenRadio = React.createRef();
+        this.ratingMin = React.createRef();
+        this.ratingMax = React.createRef();
     }
 
     state = { visible: false };
@@ -45,53 +45,44 @@ class MovieFilter extends React.Component {
     filterYear = () => { this.props.filterYear(this.props.movieList); }
     filterTitle = () => { this.props.filterTitle(this.props.movieList); }
 
-    onFinish = (values) => {
-        // e.preventDefault();
+    handleSubmit = (e) => {
+        e.preventDefault();
 
-        // let titleValue = "";
-        // let minYear = "";
-        // let maxYear = "";
-        // let minRating = "";
-        // let maxRating = "";
+        let titleValue = "";
+        let minYear = "";
+        let maxYear = "";
+        let minRating = "";
+        let maxRating = "";
 
-        // if (this.title.current.value !== "") {
-        //     titleValue = `${this.title.value}`;
-        //     console.log("has title");
-        // }
+        if (this.title.current.value !== "") {
+            titleValue = `${this.title.current.value}`;
+            console.log("has title");
+        }
 
-        // if (this.state.yearRadio === "yearBefore") {
-        //     maxYear = this.yearBefore.current.value;
-        // }
-        // else if (this.state.yearRadio === "yearAfter") {
-        //     minYear = this.yearAfter.current.value;
-        // }
-        // else if (this.state.yearRadio === "yearBetween") {
-        //     minYear = this.yearMin.current.value;
-        //     maxYear = this.yearMax.current.value;
-        // }
+        if (this.state.yearRadio === "yearBefore") {
+            maxYear = this.yearBefore.current.value;
+        }
+        else if (this.state.yearRadio === "yearAfter") {
+            minYear = this.yearAfter.current.value;
+        }
+        else if (this.state.yearRadio === "yearBetween") {
+            minYear = this.yearMin.current.value;
+            maxYear = this.yearMax.current.value;
+        }
 
-        // if (this.state.ratingRadio === "ratingBelow") {
-        //     maxRating = this.ratingBelow.current.value;
-        // }
-        // else if (this.state.ratingRadio === "ratingAbove") {
-        //     minRating = this.ratingAbove.current.value;
-        // }
-        // else if (this.state.ratingRadio === "ratingBetween") {
-        //     minRating = this.ratingMin.current.value;
-        //     maxRating = this.ratingMax.current.value;
-        // }
+        if (this.state.ratingRadio === "ratingBelow") {
+            maxRating = this.ratingBelow.current.value;
+        }
+        else if (this.state.ratingRadio === "ratingAbove") {
+            minRating = this.ratingAbove.current.value;
+        }
+        else if (this.state.ratingRadio === "ratingBetween") {
+            minRating = this.ratingMin.current.value;
+            maxRating = this.ratingMax.current.value;
+        }
 
-        console.log(values);
-        // this.props.filterMovie(titleValue, minYear, maxYear, minRating, maxRating);
-    }
-
-    done = values => {
-        console.log(values);
-    }
-
-    onFinishFailed = errorInfo => {
-        console.log(errorInfo);
-
+        console.log("hi");
+        this.props.filterMovie(titleValue, minYear, maxYear, minRating, maxRating);
     }
 
     render() {
@@ -114,50 +105,66 @@ class MovieFilter extends React.Component {
                         <Button onClick={this.filterRating}>By Rating</Button>
                     </Space>
 
-                    <Form onFinish={this.done} onFinishFailed={this.onFinishFailed} name="filter-form" id="filterForm">
+                    <Form onSubmit={this.handleSubmit} id="filterForm">
                         <Form.Item>
                             <Title level={4}>Title</Title>
-                            <Input label="Title" name="title" />
+                            <Input name="title" ref={this.title} />
                         </Form.Item>
 
                         <Form.Item className="filterYear">
                             <Title level={4}>Year</Title>
+                            <div>
+                                <div>
+                                    <Row gutter={[8, 8]}>
+                                        <Col span={8}><Radio name="yearBefore" checked={this.state.yearRadio === "yearBefore"} onChange={this.consoleYear} ref={this.yearBeforeRadio}>Before</Radio></Col>
+                                        <Col span={8}><Input name="beforeNum" ref={this.yearBefore} /></Col>
+                                    </Row>
+                                </div>
+                                <div>
+                                    <Row gutter={[8, 8]}>
+                                        <Col span={8}><Radio name="yearAfter" checked={this.state.yearRadio === "yearAfter"} onChange={this.consoleYear} ref={this.yearAfterRadio}>After</Radio></Col>
+                                        <Col span={8}><Input name="afterNum" ref={this.yearAfter} /></Col>
+                                    </Row>
+                                </div>
 
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="yearBefore" name="yearBefore" checked={this.state.yearRadio === "yearBefore"}  >Before</Radio></Col>
-                                <Col span={8}><Input label="beforeNum" name="beforeNum" ref={this.yearBefore} /></Col>
-                            </Row>
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="yearAfter" name="yearAfter" checked={this.state.yearRadio === "yearAfter"} >After</Radio></Col>
-                                <Col span={8}><Input label="afterNum" name="afterNum" ref={this.yearAfter} /></Col>
-                            </Row>
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="yearBetween" name="yearBetween" checked={this.state.yearRadio === "yearBetween"} >Between</Radio></Col>
-                                <Col span={8}><Input label="beforeNum" name="beforeNum" /></Col>
-                                <Col span={8}><Input label="afterNum" name="afterNum" /></Col>
-                            </Row>
+                                <div>
+                                    <Row gutter={[8, 8]}>
+                                        <Col span={8}><Radio name="yearBetween" checked={this.state.yearRadio === "yearBetween"} onChange={this.consoleYear} ref={this.yearBetweenRadio}>Between</Radio></Col>
+                                        <Col span={8}><Input name="beforeNum" ref={this.yearMin} /></Col>
+                                        <Col span={8}><Input name="beforeNum" ref={this.yearMax} /></Col>
+                                    </Row>
+                                </div>
+                            </div>
                         </Form.Item>
 
                         <Form.Item className="filterRating">
 
                             <Title level={4}>Rating</Title>
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="ratingBelow" name="ratingBelow" checked={this.state.ratingRadio === "ratingBelow"} >Below</Radio></Col>
-                                <Col span={8}><Input label="ratingBelow" name="ratingBelow" /></Col>
-                            </Row>
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="ratingAbove" name="ratingAbove" checked={this.state.ratingRadio === "ratingAbove"} >Above</Radio></Col>
-                                <Col span={8}><Input label="ratingAbove" name="ratingAbove" /></Col>
-                            </Row>
-                            <Row gutter={[8, 8]}>
-                                <Col span={8}><Radio label="ratingBetween" name="ratingBetween" checked={this.state.ratingRadio === "ratingBetween"} >Between</Radio></Col>
-                                <Col span={8}><Input label="minRating" name="minRating" /></Col>
-                                <Col span={8}><Input label="maxRating" name="maxRating" /></Col>
-                            </Row>
+                            <div>
+                                <div>
+                                    <Row gutter={[8, 8]}>
+                                        <Col span={8}><Radio name="ratingBelow" checked={this.state.ratingRadio === "ratingBelow"} onChange={this.consoleRating} ref={this.ratingBelowRadio}>Below</Radio></Col>
+                                        <Col span={8}><Input name="ratingBelow" ref={this.ratingBelow} /></Col>
+                                    </Row>
+                                </div>
+                                <div>
+                                    <Row gutter={[8, 8]}>
+                                        <Col span={8}><Radio name="ratingAbove" checked={this.state.ratingRadio === "ratingAbove"} onChange={this.consoleRating} ref={this.ratingAboveRadio}>Above</Radio></Col>
+                                        <Col span={8}><Input name="ratingAbove" ref={this.ratingAbove} /></Col>
+                                    </Row>
+                                </div>
+                                <div>
+                                    <Row gutter={[8, 8]}>
+                                        <Col span={8}><Radio name="ratingBetween" checked={this.state.ratingRadio === "ratingBetween"} onChange={this.consoleRating} ref={this.ratingBetweenRadio}>Between</Radio></Col>
+                                        <Col span={8}><Input name="minRating" ref={this.ratingMin} /></Col>
+                                        <Col span={8}><Input name="maxRating" ref={this.ratingMax} /></Col>
+                                    </Row>
+                                </div>
+                            </div>
                         </Form.Item>
 
                         <Space>
-                            <Button type="primary" htmlType="submit">Filter</Button>
+                            <Button type="primary">Filter</Button>
                             <Button type="primary" onClick={this.props.clearFilter}>Clear</Button>
                         </Space>
                     </Form>
