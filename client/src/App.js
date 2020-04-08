@@ -36,7 +36,7 @@ class App extends React.Component {
   /** Fetching of API**/
   async componentDidMount() {
     try {
-      this.authCheck();
+      //this.authCheck();
       const url = "https://comp4513asg2.herokuapp.com/api/movies";
 
       //const url = "/api/brief";
@@ -122,7 +122,7 @@ class App extends React.Component {
                 </Switch>
               </CSSTransition>
             </TransitionGroup>
-          )} onEnter={this.authCheck} />
+          )}/>
           {/* Movie Details Component Route */}
           <Route path="/moviedetails" exact component={MovieDetailsView}/>
         </main>
