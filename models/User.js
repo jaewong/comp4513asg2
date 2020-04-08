@@ -25,11 +25,12 @@ const userSchema = new mongoose.Schema({
     favorites: Array
 });
 
+// syncs bcrypt salt with compare sunc
 userSchema.generateHash = function (password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 }
 
-//We'll use this later on to make sure that the user trying to log in has the correct credentials
+//Authenticates proper password
 userSchema.methods.isValidPassword = function (formPassword) {
     const user = this;
     const hash = user.password;
