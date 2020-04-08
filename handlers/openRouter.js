@@ -29,7 +29,7 @@ router.post('/login', async (req, resp, next) => {
          successRedirect: '/',
          failureRedirect: '/login',
          failureFlash: true
-      })(req, resp, next);
+      })(req, resp, next)
 });
 
 module.exports = router;

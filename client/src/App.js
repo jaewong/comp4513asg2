@@ -7,7 +7,7 @@
  *    Add to Favorites function
  *    Delete from favorites 
  *    Fetching of Movie API from Node
- *    Authentication of Login (JWT)
+ *    Authentication of Login (JWT) - Does not work as we coulndt figure out how toget login to work
  */
 
  /** Imports **/
@@ -55,9 +55,9 @@ class App extends React.Component {
     }
   }
 
-  /** Check Login **/
+  /** Should check for login **/
   // loggedin = () => {
-  //   //Login conition
+  //   //Login condition (JWT Token)
   //   return false; 
   // }
 
